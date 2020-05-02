@@ -1,16 +1,5 @@
 import { createState } from '../utils';
-
-export interface UserDetails {
-  email: string,
-  token: string,
-  username: string,
-  bio: string,
-  image: string
-}
-
-interface UserState {
-  user: UserDetails | null  
-}
+import { UserState, UserDetails } from '../types';
 
 const initialState: UserState = {
   user: null

@@ -1,13 +1,8 @@
 /** @jsx createElement */
 import { createElement, Context } from "@bikeshaving/crank";
+import { ErrorDetails } from "../types";
 
-interface Props {
-  errors: {
-    [key: string]: string[]
-  }
-}
-
-export async function* Errors(this: Context, {errors}: Props) {
+export async function* Errors(this: Context, {errors}: ErrorDetails) {
   for await ({errors} of this) {
     yield (
       <ul class="error-messages">

@@ -1,12 +1,12 @@
 /** @jsx createElement */
 import { createElement, Fragment, Context } from "@bikeshaving/crank";
-import { register } from '../../services/userService';
+import { login } from "../../services/userService";
 import { Errors } from "../../components/Errors";
+import { setUser } from "../../state/userState";
 import page from 'page';
-import { setUser } from '../../state/userState';
 import { ErrorDetails, UserDetails } from "../../types";
 
-export function* RegistrationForm(this: Context) {
+export function* LoginForm(this: Context) {
   let loading = false;
   let hasErrors = false;
   let response: UserDetails | ErrorDetails = {} as ErrorDetails;
@@ -21,15 +21,14 @@ export function* RegistrationForm(this: Context) {
       this.refresh();
 
       const formData = new FormData(event.target as HTMLFormElement);
-      const resp = await register({
-        username: formData.get('username') as string,
+      const resp = await login({
         email: formData.get('email') as string,
         password: formData.get('password') as string
       });
 
       hasErrors = resp.hasErrors;
       response = resp.response;
-      if(hasErrors) {
+      if (hasErrors) {
         loading = false;
         this.refresh();
       }
@@ -40,23 +39,20 @@ export function* RegistrationForm(this: Context) {
     })();
   };
 
-  while (true) {
+  while(true) {
     yield (
       <div class="auth-page">
         <div class="container page">
           <div class="row">
             <div class="col-md-6 offset-md-3 col-xs-12">
-              <h1 class="text-xs-center">Sign up</h1>
+              <h1 class="text-xs-center">Sign in</h1>
               <p class="text-xs-center">
-                <a href="/login">Have an account?</a>
+                <a href="/register">Need an account?</a>
               </p>
 
-              {hasErrors && <Errors errors={response.errors}/>}
+              {hasErrors && <Errors errors={response.errors} />}
 
               <form onsubmit={handleSubmit}>
-                <fieldset class="form-group">
-                  <input class="form-control form-control-lg" type="text" name="username" placeholder="Your Name" />
-                </fieldset>
                 <fieldset class="form-group">
                   <input class="form-control form-control-lg" type="email" name="email" placeholder="Email" />
                 </fieldset>
@@ -64,7 +60,7 @@ export function* RegistrationForm(this: Context) {
                   <input class="form-control form-control-lg" type="password" name="password" placeholder="Password" />
                 </fieldset>
                 <button class="btn btn-lg btn-primary pull-xs-right" disabled={loading}>
-                  Sign up
+                  Sign in
                 </button>
               </form>
             </div>
@@ -73,5 +69,4 @@ export function* RegistrationForm(this: Context) {
       </div>
     );
   }
-
 }

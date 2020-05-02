@@ -1,21 +1,5 @@
-import { setUser, UserDetails } from '../state/userState';
-
-interface RegisterProps {
-  username: string,
-  email: string,
-  password: string
-}
-
-export interface ErrorDetails {
-  errors: {
-    [key: string]: string[]
-  }
-}
-
-interface RegisterResp {
-  hasErrors: boolean,
-  response: UserDetails | ErrorDetails
-}
+import { setUser } from '../state/userState';
+import { RegisterProps, RegisterResp, LoginProps, LoginResp } from '../types';
 
 export const register = async (info: RegisterProps): Promise<RegisterResp> => {
   const resp = await fetch('https://conduit.productionready.io/api/users', {
@@ -35,4 +19,20 @@ export const register = async (info: RegisterProps): Promise<RegisterResp> => {
 
 export const logout = () => {
   setUser(null);
+};
+
+export const login = async (info: LoginProps): Promise<LoginResp> => {
+  const resp = await fetch('https://conduit.productionready.io/api/users/login', {
+    method: 'POST',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ user: info })
+  });
+
+  const respJson = await resp.json();
+
+  return {
+    hasErrors: resp.status !== 200,
+    response: respJson
+  }
 };
