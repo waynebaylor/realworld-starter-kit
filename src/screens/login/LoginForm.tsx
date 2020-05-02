@@ -33,7 +33,6 @@ export function* LoginForm(this: Context) {
         this.refresh();
       }
       else {
-        setUser(response as UserDetails);
         page('/');
       }
     })();

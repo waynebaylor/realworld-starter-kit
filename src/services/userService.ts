@@ -1,5 +1,5 @@
 import { setUser } from '../state/userState';
-import { RegisterProps, RegisterResp, LoginProps, LoginResp } from '../types';
+import { RegisterProps, RegisterResp, LoginProps, LoginResp, UserDetails } from '../types';
 
 export const register = async (info: RegisterProps): Promise<RegisterResp> => {
   const resp = await fetch('https://conduit.productionready.io/api/users', {
@@ -30,6 +30,8 @@ export const login = async (info: LoginProps): Promise<LoginResp> => {
   });
 
   const respJson = await resp.json();
+
+  setUser(respJson.user as UserDetails);
 
   return {
     hasErrors: resp.status !== 200,

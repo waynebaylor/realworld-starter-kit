@@ -5,16 +5,11 @@ import { getArticles } from "../../services/articleService";
 import classNames from 'classnames';
 import { isLoggedIn } from "../../state/userState";
 import { ArticleDetails, ArticlesResp } from "../../types";
+import { FavoriteButton } from "./FavoriteButton";
 
 export async function* GlobalFeed(this: Context, {children}: {children: Children}) {
   let limit = 10;
   let offset = 0;
-
-  const handleFavorite = (event: Event) => {
-    if (isLoggedIn()) {
-      // favorite
-    }
-  };
 
   const handlePrev = (event: Event) => {
     event.preventDefault();
@@ -54,9 +49,7 @@ export async function* GlobalFeed(this: Context, {children}: {children: Children
                 <a href={`/profile/${article.author.username}`} class="author">{article.author.username}</a>
                 <span class="date" title={article.createdAt}>{new Date(article.createdAt).toDateString()}</span>
               </div>
-              <button type="button" class={classNames('btn', 'btn-sm', 'pull-xs-right', { 'btn-outline-primary': !article.favorited, 'btn-primary': article.favorited })} onclick={handleFavorite}>
-                <i class="ion-heart"></i> {article.favoritesCount}
-              </button>
+              <FavoriteButton slug={article.slug} count={article.favoritesCount} favorited={article.favorited}/>
             </div>
             <a href={`/article/${article.slug}`} class="preview-link">
               <h1>{article.title}</h1>
