@@ -1,44 +1,52 @@
 /** @jsx createElement */
-import { createElement, Fragment, Context } from "@bikeshaving/crank";
+import { createElement, Fragment, Context, Children } from "@bikeshaving/crank";
+import { LoadingIndicator } from "../../components";
+import { getYourFeedArticles } from "../../services/feedService";
+import { ArticleDetails } from "../../types";
+import { ArticleList } from "../../components/ArticleList";
+import classNames from "classnames";
 
-export function YourFeed() {
-  return (
-    <Fragment>
-      <div class="article-preview">
-        <div class="article-meta">
-          <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
-          <div class="info">
-            <a href="" class="author">Eric Simons</a>
-            <span class="date">January 20th</span>
-          </div>
-          <button class="btn btn-outline-primary btn-sm pull-xs-right">
-            <i class="ion-heart"></i> 29
-            </button>
-        </div>
-        <a href="" class="preview-link">
-          <h1>How to build webapps that scale</h1>
-          <p>This is the description for the post.</p>
-          <span>Read more...</span>
-        </a>
-      </div>
+export async function* YourFeed(this: Context, {children}: {children: Children}) {
+  let limit = 10;
+  let offset = 0;
 
-      <div class="article-preview">
-        <div class="article-meta">
-          <a href="profile.html"><img src="http://i.imgur.com/N4VcUeJ.jpg" /></a>
-          <div class="info">
-            <a href="" class="author">Albert Pai</a>
-            <span class="date">January 20th</span>
-          </div>
-          <button class="btn btn-outline-primary btn-sm pull-xs-right">
-            <i class="ion-heart"></i> 32
-            </button>
-        </div>
-        <a href="" class="preview-link">
-          <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
-          <p>This is the description for the post.</p>
-          <span>Read more...</span>
-        </a>
+  const handlePrev = (event: Event) => {
+    event.preventDefault();
+    offset = Math.max(0, offset -= limit);
+    this.refresh();
+  };
+
+  const handleNext = (event: Event) => {
+    event.preventDefault();
+    offset += limit;
+    this.refresh();
+  }
+
+  for await (let _ of this) {
+    yield (
+      <div style="display:flex; justify-content:center; margin:50px;">
+        <LoadingIndicator />
       </div>
-    </Fragment>
-  );
+    );
+
+    const resp = await getYourFeedArticles({ limit, offset });
+
+    if (resp.hasErrors) {
+      throw new Error('Error getting global feed.')
+    }
+
+    const articles: ArticleDetails[] = resp.response?.articles as ArticleDetails[];
+    const articlesCount: number = resp.response?.articlesCount as number;
+
+    yield (
+      <Fragment>
+        <ArticleList articles={articles}/>
+        
+        <ul class="pagination">
+          <li class={classNames('page-item', { disabled: offset === 0 })}><a class="page-link" href="" onclick={handlePrev}>Previous</a></li>
+          <li class={classNames('page-item', { disabled: (offset + limit) >= articlesCount })}><a class="page-link" href="" onclick={handleNext}>Next</a></li>
+        </ul>
+      </Fragment>
+    );
+  }
 }

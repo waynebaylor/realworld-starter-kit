@@ -2,7 +2,7 @@
 import { createElement } from "@bikeshaving/crank";
 import './styles.scss';
 import page from 'page';
-import { HomeScreen, RegisterScreen, LoginScreen } from "./screens";
+import { HomeScreen, RegisterScreen, LoginScreen, SettingsScreen } from "./screens";
 import { render } from "./utils";
 
 page('/', (context) => {
@@ -15,6 +15,10 @@ page('/register', (context) => {
 
 page('/login', (context) => {
   render(<LoginScreen/>);
+});
+
+page('/settings', (context) => {
+  render(<SettingsScreen/>);
 });
 
 page();
