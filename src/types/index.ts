@@ -6,7 +6,11 @@ export interface UserDetails {
   image: string
 }
 
-export interface ErrorDetails {
+export interface UserResp {
+  user: UserDetails
+}
+
+export interface ErrorResp {
   errors: {
     [key: string]: string[]
   }
@@ -16,7 +20,7 @@ export interface UserState {
   user: UserDetails | null
 }
 
-export interface RegisterProps {
+export interface RegisterReq {
   username: string,
   email: string,
   password: string
@@ -24,17 +28,17 @@ export interface RegisterProps {
 
 export interface RegisterResp {
   hasErrors: boolean,
-  response: UserDetails | ErrorDetails
+  response: UserResp | ErrorResp
 }
 
-export interface LoginProps {
+export interface LoginReq {
   email: string,
   password: string
 }
 
 export interface LoginResp {
   hasErrors: boolean,
-  response: UserDetails | ErrorDetails
+  response: UserResp | ErrorResp
 }
 
 export interface TagList {
@@ -46,7 +50,7 @@ export interface PopularTagsResp {
   response: TagList | null
 }
 
-export interface ArticlesProps {
+export interface ArticlesReq {
   limit: number,
   offset: number
 }
@@ -75,4 +79,17 @@ export interface ArticlesResp {
     articles: ArticleDetails[],
     articlesCount: number
   } | null
+}
+
+export interface UpdateSettingsReq {
+  email: string,
+  username: string,
+  bio: string,
+  image: string,
+  password: string
+}
+
+export interface UpdateSettingsResp {
+  hasErrors: boolean,
+  response: UserResp | ErrorResp
 }

@@ -1,15 +1,14 @@
 /** @jsx createElement */
 import { createElement, Fragment, Context } from "@bikeshaving/crank";
 import { login } from "../../services/userService";
-import { Errors } from "../../components/Errors";
+import { Errors } from "../../components";
 import { setUser } from "../../state/userState";
 import page from 'page';
-import { ErrorDetails, UserDetails } from "../../types";
+import { ErrorResp, UserResp, LoginResp } from "../../types";
 
 export function* LoginForm(this: Context) {
   let loading = false;
-  let hasErrors = false;
-  let response: UserDetails | ErrorDetails = {} as ErrorDetails;
+  let { hasErrors, response }: LoginResp = { hasErrors: false, response: {} as ErrorResp };
 
   const handleSubmit = (event: Event) => {
     event.preventDefault();
@@ -17,7 +16,7 @@ export function* LoginForm(this: Context) {
     (async () => {
       loading = true;
       hasErrors = false;
-      response = {} as ErrorDetails;
+      response = {} as ErrorResp;
       this.refresh();
 
       const formData = new FormData(event.target as HTMLFormElement);
@@ -33,6 +32,7 @@ export function* LoginForm(this: Context) {
         this.refresh();
       }
       else {
+        setUser((response as UserResp).user);
         page('/');
       }
     })();

@@ -1,14 +1,16 @@
-import { ArticlesResp, ArticlesProps, UserDetails } from "../types";
+import { ArticlesResp, ArticlesReq, UserDetails } from "../types";
 import * as qs from 'query-string';
 import { getUser, isLoggedIn } from "../state/userState";
 
-export const getGlobalFeedArticles = async (props: ArticlesProps): Promise<ArticlesResp> => {
+export const getGlobalFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => {
+  const user = getUser() as UserDetails;
+
   let headers = {};
   if(isLoggedIn()) {
-    headers = {Authorization: `Token ${getUser()?.token as string}`}
+    headers = {Authorization: `Token ${user.token as string}`}
   }
 
-  const params = qs.stringify(props);
+  const params = qs.stringify(req);
   const resp = await fetch(`https://conduit.productionready.io/api/articles?${params}`, {
     method: 'GET',
     mode: 'cors',
@@ -23,13 +25,15 @@ export const getGlobalFeedArticles = async (props: ArticlesProps): Promise<Artic
   }
 };
 
-export const getYourFeedArticles = async (props: ArticlesProps): Promise<ArticlesResp> => {
-  const params = qs.stringify(props);
+export const getYourFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => {
+  const user = getUser() as UserDetails;
+
+  const params = qs.stringify(req);
   const resp = await fetch(`https://conduit.productionready.io/api/articles/feed?${params}`, {
     method: 'GET',
     mode: 'cors',
     headers: { 
-      Authorization: `Token ${getUser()?.token as string}` 
+      Authorization: `Token ${user.token as string}` 
     }
   });
 
