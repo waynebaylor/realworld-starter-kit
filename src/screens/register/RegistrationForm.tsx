@@ -1,10 +1,10 @@
 /** @jsx createElement */
-import { createElement, Fragment, Context } from "@bikeshaving/crank";
-import { register } from '../../services/userService';
-import { Errors } from "../../components";
+import { createElement, Fragment, Context } from '@bikeshaving/crank';
+import { register, LoginResp, UserResp } from '../../services/userService';
+import { Errors } from '../../components';
 import page from 'page';
 import { setUser } from '../../state/userState';
-import { ErrorResp, LoginResp, UserResp } from "../../types";
+import { ErrorResp } from '../../services';
 
 export function* RegistrationForm(this: Context) {
   let loading = false;
@@ -23,16 +23,15 @@ export function* RegistrationForm(this: Context) {
       const resp = await register({
         username: formData.get('username') as string,
         email: formData.get('email') as string,
-        password: formData.get('password') as string
+        password: formData.get('password') as string,
       });
 
       hasErrors = resp.hasErrors;
       response = resp.response;
-      if(hasErrors) {
+      if (hasErrors) {
         loading = false;
         this.refresh();
-      }
-      else {
+      } else {
         setUser((response as UserResp).user);
         page('/');
       }
@@ -50,7 +49,7 @@ export function* RegistrationForm(this: Context) {
                 <a href="/login">Have an account?</a>
               </p>
 
-              {hasErrors && <Errors errors={response.errors}/>}
+              {hasErrors && <Errors errors={response.errors} />}
 
               <form onsubmit={handleSubmit}>
                 <fieldset class="form-group">
@@ -72,5 +71,4 @@ export function* RegistrationForm(this: Context) {
       </div>
     );
   }
-
 }

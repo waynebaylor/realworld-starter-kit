@@ -15,6 +15,7 @@
     "@bikeshaving/crank": "0.1.2",
     "classnames": "2.2.6",
     "immer": "6.0.3",
+    "marked": "^1.0.0",
     "page": "1.11.6",
     "query-string": "6.12.1"
   },

@@ -1,32 +1,33 @@
 /** @jsx createElement */
-import { createElement, Fragment, Context } from "@bikeshaving/crank";
-import classNames from "classnames";
-import { isLoggedIn } from "../../state/userState";
-import { unfavorite, favorite } from "../../services/favoriteService";
+import { Context, createElement, Fragment } from '@bikeshaving/crank';
+import { favoritePostEvent, unfavoritePostEvent } from '../../services/eventService';
 
-export function* FavoriteButton(this: Context, {slug, count, favorited}: {slug: string, count: number, favorited: boolean}) {
+export function* FavoriteButton(this: Context, { slug, favoritesCount, favorited }: { slug: string; favoritesCount: number; favorited: boolean }) {
   const handleFavorite = (event: Event) => {
-    if (isLoggedIn()) {
-      if(favorited) {
-        unfavorite(slug);
-        count--;
-        favorited = false;
-      }
-      else {
-        favorite(slug)
-        count++;
-        favorited = true;
-      }
-
-      this.refresh();
-    }
+    event.preventDefault();
+    this.dispatchEvent(favoritePostEvent({ slug }));
   };
 
-  while(true) {
+  const handleUnfavorite = (event: Event) => {
+    event.preventDefault();
+    this.dispatchEvent(unfavoritePostEvent({ slug }));
+  };
+
+  for ({ favorited, favoritesCount } of this) {
     yield (
-      <button type="button" class={classNames('btn', 'btn-sm', 'pull-xs-right', { 'btn-outline-primary': !favorited, 'btn-primary': favorited })} onclick={handleFavorite}>
-        <i class="ion-heart"></i> {count}
-      </button>
+      <Fragment>
+        {favorited && (
+          <button type="button" class="btn btn-sm pull-xs-right btn-primary" onclick={handleUnfavorite}>
+            <i class="ion-heart"></i> {favoritesCount}
+          </button>
+        )}
+
+        {!favorited && (
+          <button type="button" class="btn btn-sm pull-xs-right btn-outline-primary" onclick={handleFavorite}>
+            <i class="ion-heart"></i> {favoritesCount}
+          </button>
+        )}
+      </Fragment>
     );
   }
 }

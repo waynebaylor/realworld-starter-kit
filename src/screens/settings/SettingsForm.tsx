@@ -1,27 +1,17 @@
 /** @jsx createElement */
-import { createElement, Fragment, Context } from "@bikeshaving/crank";
-import { Errors } from "../../components";
-import { setUser, getUser } from "../../state/userState";
-import { ErrorResp, LoginResp, UserResp, UserDetails, UpdateSettingsResp } from "../../types";
-import { updateSettings } from "../../services/userService";
-
-// const getFormValues = (formData: FormData) => {
-//   return {
-//     image: formData.get('image') as string,
-//     username: formData.get('username') as string,
-//     bio: formData.get('bio') as string,
-//     email: formData.get('email') as string,
-//     password: formData.get('password') as string
-//   };
-// }
+import { createElement, Context } from '@bikeshaving/crank';
+import { Errors } from '../../components';
+import { setUser, getUser } from '../../state/userState';
+import { updateSettings, UserResp } from '../../services/userService';
+import { UserDetails } from '../../types';
+import { ErrorResp } from '../../services';
 
 export function* SettingsForm(this: Context) {
   const user = getUser() as UserDetails;
-  
+
   let loading = false;
   let hasErrors = false;
   let response;
-  let { image, username, bio, email } = user;
 
   const handleSubmit = (event: Event) => {
     event.preventDefault();
@@ -39,7 +29,7 @@ export function* SettingsForm(this: Context) {
         username: formData.get('username') as string,
         bio: formData.get('bio') as string,
         email: formData.get('email') as string,
-        password: formData.get('password') as string
+        password: formData.get('password') as string,
       });
 
       loading = false;
@@ -47,13 +37,13 @@ export function* SettingsForm(this: Context) {
       response = resp.response;
       if (!hasErrors) {
         setUser((response as UserResp).user);
-      }  
-      
+      }
+
       this.refresh();
     })();
   };
 
-  while(true) {
+  while (true) {
     yield (
       <div class="settings-page">
         <div class="container page">
@@ -62,7 +52,7 @@ export function* SettingsForm(this: Context) {
               <h1 class="text-xs-center">Your Settings</h1>
 
               {!hasErrors && response && <div class="alert alert-success">Settings saved.</div>}
-              
+
               {hasErrors && response && <Errors errors={(response as ErrorResp).errors} />}
 
               <form onsubmit={handleSubmit}>
@@ -84,7 +74,7 @@ export function* SettingsForm(this: Context) {
                   </fieldset>
                   <button class="btn btn-lg btn-primary pull-xs-right" disabled={loading}>
                     Update Settings
-                </button>
+                  </button>
                 </fieldset>
               </form>
             </div>
@@ -94,5 +84,3 @@ export function* SettingsForm(this: Context) {
     );
   }
 }
-
-// https://images.generated.photos/UqfEutU09eiT8Z9jqe238V8s6R-d3dNaEbR1FPU1H9U/rs:fit:512:512/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzAzMTU1ODQuanBn.jpg

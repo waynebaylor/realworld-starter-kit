@@ -1,10 +1,10 @@
 /** @jsx createElement */
-import { createElement, Fragment, Context } from "@bikeshaving/crank";
-import { login } from "../../services/userService";
-import { Errors } from "../../components";
-import { setUser } from "../../state/userState";
+import { createElement, Fragment, Context } from '@bikeshaving/crank';
+import { login, LoginResp, UserResp } from '../../services/userService';
+import { Errors } from '../../components';
+import { setUser } from '../../state/userState';
 import page from 'page';
-import { ErrorResp, UserResp, LoginResp } from "../../types";
+import { ErrorResp } from '../../services';
 
 export function* LoginForm(this: Context) {
   let loading = false;
@@ -22,7 +22,7 @@ export function* LoginForm(this: Context) {
       const formData = new FormData(event.target as HTMLFormElement);
       const resp = await login({
         email: formData.get('email') as string,
-        password: formData.get('password') as string
+        password: formData.get('password') as string,
       });
 
       hasErrors = resp.hasErrors;
@@ -30,15 +30,14 @@ export function* LoginForm(this: Context) {
       if (hasErrors) {
         loading = false;
         this.refresh();
-      }
-      else {
+      } else {
         setUser((response as UserResp).user);
         page('/');
       }
     })();
   };
 
-  while(true) {
+  while (true) {
     yield (
       <div class="auth-page">
         <div class="container page">
