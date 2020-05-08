@@ -5,6 +5,7 @@ import { getUser, isLoggedIn } from '../state/userState';
 export interface ArticlesReq {
   limit: number;
   offset: number;
+  tag?: string;
 }
 
 export interface ArticlesResp {
@@ -33,11 +34,11 @@ export const getGlobalFeedArticles = async (req: ArticlesReq): Promise<ArticlesR
     headers,
   });
 
-  const respJson = await resp.json();
+  const respObj = await resp.json();
 
   return {
     hasErrors: resp.status !== 200,
-    response: respJson,
+    response: respObj,
   };
 };
 
@@ -57,10 +58,36 @@ export const getYourFeedArticles = async (req: ArticlesReq): Promise<ArticlesRes
     },
   });
 
-  const respJson = await resp.json();
+  const respObj = await resp.json();
 
   return {
     hasErrors: resp.status !== 200,
-    response: respJson,
+    response: respObj,
+  };
+};
+
+/**
+ * get tag feed articles
+ */
+
+export const getTagFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => {
+  let headers = {};
+  if (isLoggedIn()) {
+    const user = getUser() as UserDetails;
+    headers = { Authorization: `Token ${user.token as string}` };
+  }
+
+  const params = qs.stringify(req);
+  const resp = await fetch(`https://conduit.productionready.io/api/articles?${params}`, {
+    method: 'GET',
+    mode: 'cors',
+    headers,
+  });
+
+  const respObj = await resp.json();
+
+  return {
+    hasErrors: resp.status !== 200,
+    response: respObj,
   };
 };

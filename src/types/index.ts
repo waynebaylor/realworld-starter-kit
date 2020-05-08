@@ -10,6 +10,10 @@ export interface UserState {
   user: UserDetails | null;
 }
 
+export interface PageContextState {
+  context: PageJS.Context | null;
+}
+
 export interface TagList {
   tags: string[];
 }

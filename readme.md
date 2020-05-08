@@ -4,6 +4,8 @@
 - <Portal> doesn't clean up after itself
 - How to mix state and props? Can't do while(true) and for..of(this).
 - CommentSection.tsx: for await of(this) works, but while(true) doesn't.
+- ArticleList.tsx: would be nice to have the event listeners inside the for loop, but they don't get removed when iterating
+- GlobalFeed.tsx: for...of(this) when the component doesn't have any props
 
 # ![RealWorld Example App](logo.png)
 

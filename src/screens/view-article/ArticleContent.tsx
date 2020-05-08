@@ -8,7 +8,14 @@ export function* ArticleContent(this: Context, { article }: { article: ArticleDe
     yield (
       <div class="row article-content">
         <div class="col-md-12">
-          <Raw value={marked(article.body)} />
+          <div>
+            <Raw value={marked(article.body)} />
+          </div>
+          <ul class="tag-list">
+            {article.tagList.map((tag) => (
+              <li class="tag-default tag-pill tag-outline">{tag}</li>
+            ))}
+          </ul>
         </div>
       </div>
     );

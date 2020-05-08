@@ -1,25 +1,24 @@
 /** @jsx createElement */
-import { createElement, Fragment } from "@bikeshaving/crank";
-import { Navbar, Footer } from "../../components";
-import { Banner } from "./Banner";
-import { Feeds } from "./Feeds";
-import { Sidebar } from "./Sidebar";
+import { createElement, Fragment, Context } from '@bikeshaving/crank';
+import { Navbar, Footer } from '../../components';
+import { Banner } from './Banner';
+import { Feeds } from './Feeds';
+import { Sidebar } from './Sidebar';
 
-export function HomeScreen() {
+export function HomeScreen(this: Context) {
   return (
     <Fragment>
-      <Navbar active="home"/>
-      
-      <div class="home-page">
-        <Banner/>
+      <Navbar active="home" />
 
+      <div class="home-page">
+        <Banner />
         <div class="container page">
           <div class="row">
             <div class="col-md-9">
-              <Feeds/>
+              <Feeds />
             </div>
             <div class="col-md-3">
-              <Sidebar/>
+              <Sidebar />
             </div>
           </div>
         </div>
@@ -27,6 +26,5 @@ export function HomeScreen() {
 
       <Footer />
     </Fragment>
-    
   );
 }

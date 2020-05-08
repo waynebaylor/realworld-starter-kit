@@ -6,28 +6,35 @@ import { HomeScreen, RegisterScreen, LoginScreen, SettingsScreen } from './scree
 import { render } from './utils';
 import { ViewArticleScreen } from './screens/view-article';
 import { logout } from './services/userService';
+import { setPageContext } from './state/pageContextState';
 
 page('/', (context) => {
+  setPageContext(context);
   render(<HomeScreen />);
 });
 
 page('/register', (context) => {
+  setPageContext(context);
   render(<RegisterScreen />);
 });
 
 page('/login', (context) => {
+  setPageContext(context);
   render(<LoginScreen />);
 });
 
 page('/settings', (context) => {
+  setPageContext(context);
   render(<SettingsScreen />);
 });
 
 page('/article/:slug', (context) => {
+  setPageContext(context);
   render(<ViewArticleScreen slug={context.params.slug} />);
 });
 
-page('/logout', () => {
+page('/logout', (context) => {
+  setPageContext(context);
   logout();
   page('/');
 });

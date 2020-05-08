@@ -1,12 +1,12 @@
 /** @jsx createElement */
 import { createElement, Fragment, Context, Children } from '@bikeshaving/crank';
 import { LoadingIndicator } from '../../components';
-import { getGlobalFeedArticles } from '../../services/feedService';
-import classNames from 'classnames';
+import { getYourFeedArticles, getTagFeedArticles } from '../../services/feedService';
 import { ArticleDetails } from '../../types';
+import classNames from 'classnames';
 import { ArticleList } from './ArticleList';
 
-export async function* GlobalFeed(this: Context, {}) {
+export async function* TagFeed(this: Context, { tag }: { tag: string }) {
   let limit = 10;
   let offset = 0;
 
@@ -22,17 +22,17 @@ export async function* GlobalFeed(this: Context, {}) {
     this.refresh();
   };
 
-  for await ({} of this) {
+  for await ({ tag } of this) {
     yield (
       <div style="display:flex; justify-content:center; margin:50px;">
         <LoadingIndicator />
       </div>
     );
 
-    const resp = await getGlobalFeedArticles({ limit, offset });
+    const resp = await getTagFeedArticles({ limit, offset, tag });
 
     if (resp.hasErrors) {
-      throw new Error('Error getting global feed.');
+      throw new Error('Error getting tag feed.');
     }
 
     const articles: ArticleDetails[] = resp.response?.articles as ArticleDetails[];

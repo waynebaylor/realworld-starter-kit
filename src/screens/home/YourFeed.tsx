@@ -3,10 +3,10 @@ import { createElement, Fragment, Context, Children } from '@bikeshaving/crank';
 import { LoadingIndicator } from '../../components';
 import { getYourFeedArticles } from '../../services/feedService';
 import { ArticleDetails } from '../../types';
-import { ArticleList } from '../../components';
 import classNames from 'classnames';
+import { ArticleList } from './ArticleList';
 
-export async function* YourFeed(this: Context, { children }: { children: Children }) {
+export async function* YourFeed(this: Context, {}) {
   let limit = 10;
   let offset = 0;
 
@@ -22,7 +22,7 @@ export async function* YourFeed(this: Context, { children }: { children: Childre
     this.refresh();
   };
 
-  for await (let _ of this) {
+  for await ({} of this) {
     yield (
       <div style="display:flex; justify-content:center; margin:50px;">
         <LoadingIndicator />
