@@ -1,11 +1,14 @@
 import { UserDetails, ArticleDetails } from '../types';
 import * as qs from 'query-string';
 import { getUser, isLoggedIn } from '../state/userState';
+import { GetArticleResp } from './articleService';
 
 export interface ArticlesReq {
   limit: number;
   offset: number;
   tag?: string;
+  author?: string;
+  favorited?: string;
 }
 
 export interface ArticlesResp {
@@ -16,11 +19,7 @@ export interface ArticlesResp {
   } | null;
 }
 
-/**
- * get global feed articles
- */
-
-export const getGlobalFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => {
+const getFeedArticles = async (req: ArticlesReq, yourFeed: boolean = false): Promise<ArticlesResp> => {
   let headers = {};
   if (isLoggedIn()) {
     const user = getUser() as UserDetails;
@@ -28,7 +27,7 @@ export const getGlobalFeedArticles = async (req: ArticlesReq): Promise<ArticlesR
   }
 
   const params = qs.stringify(req);
-  const resp = await fetch(`https://conduit.productionready.io/api/articles?${params}`, {
+  const resp = await fetch(`https://conduit.productionready.io/api/articles${yourFeed ? '/feed' : ''}?${params}`, {
     method: 'GET',
     mode: 'cors',
     headers,
@@ -41,53 +40,33 @@ export const getGlobalFeedArticles = async (req: ArticlesReq): Promise<ArticlesR
     response: respObj,
   };
 };
+
+/**
+ * get global feed articles
+ */
+
+export const getGlobalFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req);
 
 /**
  * get your feed articles
  */
 
-export const getYourFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => {
-  const user = getUser() as UserDetails;
-
-  const params = qs.stringify(req);
-  const resp = await fetch(`https://conduit.productionready.io/api/articles/feed?${params}`, {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      Authorization: `Token ${user.token as string}`,
-    },
-  });
-
-  const respObj = await resp.json();
-
-  return {
-    hasErrors: resp.status !== 200,
-    response: respObj,
-  };
-};
+export const getYourFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req, true);
 
 /**
  * get tag feed articles
  */
 
-export const getTagFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => {
-  let headers = {};
-  if (isLoggedIn()) {
-    const user = getUser() as UserDetails;
-    headers = { Authorization: `Token ${user.token as string}` };
-  }
+export const getTagFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req);
 
-  const params = qs.stringify(req);
-  const resp = await fetch(`https://conduit.productionready.io/api/articles?${params}`, {
-    method: 'GET',
-    mode: 'cors',
-    headers,
-  });
+/**
+ * get feed articles for a specific profile
+ */
 
-  const respObj = await resp.json();
+export const getProfileFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req);
 
-  return {
-    hasErrors: resp.status !== 200,
-    response: respObj,
-  };
-};
+/**
+ * get feed articles favorited by a user
+ */
+
+export const getFavoriteProfileFeedArticels = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req);

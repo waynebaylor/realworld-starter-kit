@@ -2,8 +2,17 @@
 import { createElement, Context } from '@bikeshaving/crank';
 import { popularTags } from '../../services/tagService';
 import { LoadingIndicator } from '../../components';
+import { getQueryParams, watchPageContext } from '../../state/pageContextState';
+import classNames from 'classnames';
 
-export async function* Sidebar(this: Context) {
+export async function* Sidebar(this: Context, {}) {
+  let selectedTag = getQueryParams().tag;
+
+  watchPageContext(() => {
+    selectedTag = getQueryParams().tag;
+    this.refresh();
+  });
+
   yield (
     <div class="sidebar">
       <p>Popular Tags</p>
@@ -19,16 +28,18 @@ export async function* Sidebar(this: Context) {
     throw new Error('Error getting popular tags.');
   }
 
-  return (
-    <div class="sidebar">
-      <p>Popular Tags</p>
-      <div class="tag-list">
-        {resp.response?.tags.map((t) => (
-          <a href={`/?tag=${t}`} class="tag-pill tag-default">
-            {t}
-          </a>
-        ))}
+  for await ({} of this) {
+    yield (
+      <div class="sidebar">
+        <p>Popular Tags</p>
+        <div class="tag-list">
+          {resp.response?.tags.map((t) => (
+            <a href={`/?tag=${t}`} class={classNames('tag-pill', 'tag-default', { 'tag-primary': t === selectedTag })}>
+              {t}
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

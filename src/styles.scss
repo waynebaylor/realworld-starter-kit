@@ -1,7 +1,6 @@
-
 @keyframes spinner-border {
   to {
-    transform:rotate(360deg)
+    transform: rotate(360deg);
   }
 }
 
@@ -13,5 +12,12 @@
   border: 0.25em solid #888;
   border-right-color: transparent;
   border-radius: 50%;
-  animation: spinner-border .75s linear infinite;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+/* didn't want to use action-btn class */
+.profile-page .user-info button {
+  float: right;
+  color: #999;
+  border: 1px solid #999;
 }

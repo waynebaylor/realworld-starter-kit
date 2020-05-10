@@ -1,3 +1,5 @@
+import { ParsedQuery } from 'query-string';
+
 export interface UserDetails {
   email: string;
   token: string;
@@ -12,6 +14,7 @@ export interface UserState {
 
 export interface PageContextState {
   context: PageJS.Context | null;
+  queryParams: ParsedQuery<string>;
 }
 
 export interface TagList {
@@ -49,4 +52,9 @@ export interface CommentDetails {
   };
 }
 
-export interface ProfileDetails {}
+export interface ProfileDetails {
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
+}

@@ -7,6 +7,7 @@ import { render } from './utils';
 import { ViewArticleScreen } from './screens/view-article';
 import { logout } from './services/userService';
 import { setPageContext } from './state/pageContextState';
+import { ProfileScreen } from './screens/profile';
 
 page('/', (context) => {
   setPageContext(context);
@@ -37,6 +38,11 @@ page('/logout', (context) => {
   setPageContext(context);
   logout();
   page('/');
+});
+
+page('/profile/:username', (context) => {
+  setPageContext(context);
+  render(<ProfileScreen />);
 });
 
 try {
