@@ -38,9 +38,14 @@ export async function* Navbar(this: Context, { active }: Props) {
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/logout" title="Log Out">
+                  <a class="nav-link" href={`/profile/${user.username}`}>
                     <img src={user.image} class="user-pic" />
-                    &nbsp;Log Out
+                    &nbsp;Profile
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">
+                    Log Out
                   </a>
                 </li>
               </Fragment>

@@ -14,3 +14,9 @@ export const { event: unfollowUserEvent, listener: unfollowUserListener } = crea
 
 export const { event: favoritePostEvent, listener: favoritePostListener } = createEventAndListener<{ slug: string }>('realworld.favorite-post');
 export const { event: unfavoritePostEvent, listener: unfavoritePostListener } = createEventAndListener<{ slug: string }>('realworld.unfavorite-post');
+
+export const { event: prevPageEvent, listener: prevPageListener } = createEventAndListener<void>('realworld.prev-page');
+export const { event: nextPageEvent, listener: nextPageListener } = createEventAndListener<void>('realworld.next-page');
+
+export const { event: editArticleEvent, listener: editArticleListener } = createEventAndListener<{ slug: string }>('realworld.edit-article');
+export const { event: deleteArticleEvent, listener: deleteArticleListener } = createEventAndListener<{ slug: string }>('realworld.delete-article');

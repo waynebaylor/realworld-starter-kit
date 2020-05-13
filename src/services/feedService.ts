@@ -1,7 +1,6 @@
-import { UserDetails, ArticleDetails } from '../types';
 import * as qs from 'query-string';
 import { getUser, isLoggedIn } from '../state/userState';
-import { GetArticleResp } from './articleService';
+import { ArticleDetails, UserDetails } from '../types';
 
 export interface ArticlesReq {
   limit: number;
@@ -19,7 +18,12 @@ export interface ArticlesResp {
   } | null;
 }
 
-const getFeedArticles = async (req: ArticlesReq, yourFeed: boolean = false): Promise<ArticlesResp> => {
+/**
+ * get feed articles.
+ * "your feed" has an additional url fragment, so need special handling for that.
+ */
+
+export const getFeedArticles = async (req: ArticlesReq, yourFeed: boolean = false): Promise<ArticlesResp> => {
   let headers = {};
   if (isLoggedIn()) {
     const user = getUser() as UserDetails;
@@ -40,33 +44,3 @@ const getFeedArticles = async (req: ArticlesReq, yourFeed: boolean = false): Pro
     response: respObj,
   };
 };
-
-/**
- * get global feed articles
- */
-
-export const getGlobalFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req);
-
-/**
- * get your feed articles
- */
-
-export const getYourFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req, true);
-
-/**
- * get tag feed articles
- */
-
-export const getTagFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req);
-
-/**
- * get feed articles for a specific profile
- */
-
-export const getProfileFeedArticles = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req);
-
-/**
- * get feed articles favorited by a user
- */
-
-export const getFavoriteProfileFeedArticels = async (req: ArticlesReq): Promise<ArticlesResp> => getFeedArticles(req);

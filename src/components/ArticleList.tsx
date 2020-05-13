@@ -1,9 +1,9 @@
 /** @jsx createElement */
 import { Context, createElement } from '@bikeshaving/crank';
-import { FavoriteButton } from './FavoriteButton';
-import { ArticleDetails } from '../../types';
-import { favoritePostListener, unfavoritePostListener } from '../../services/eventService';
-import { favoritePost, unfavoritePost } from '../../services/favoriteService';
+import { FavoriteButton } from '../screens/home/FavoriteButton';
+import { ArticleDetails } from '../types';
+import { favoritePostListener, unfavoritePostListener } from '../services/eventService';
+import { favoritePost, unfavoritePost } from '../services/favoriteService';
 
 export async function* ArticleList(this: Context, { articles: articlesProp }: { articles: ArticleDetails[] }) {
   let articles = articlesProp;

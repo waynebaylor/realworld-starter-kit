@@ -6,7 +6,14 @@ import { ArticleContent } from './ArticleContent';
 import { ArticleActions } from './ArticleActions';
 import { isLoggedIn } from '../../state/userState';
 import { CommentSection } from './CommentSection';
-import { followUserListener, unfollowUserListener, favoritePostListener, unfavoritePostListener } from '../../services/eventService';
+import {
+  followUserListener,
+  unfollowUserListener,
+  favoritePostListener,
+  unfavoritePostListener,
+  editArticleListener,
+  deleteArticleListener,
+} from '../../services/eventService';
 import { getArticle } from '../../services/articleService';
 import { followUser, unfollowUser } from '../../services/followService';
 import { favoritePost, unfavoritePost } from '../../services/favoriteService';
@@ -57,6 +64,18 @@ export async function* Article(this: Context, { slug }: { slug: string }) {
       article.favorited = false;
       article.favoritesCount--;
       this.refresh();
+    })
+  );
+
+  this.addEventListener(
+    ...editArticleListener((detail) => {
+      console.log('edit');
+    })
+  );
+
+  this.addEventListener(
+    ...deleteArticleListener((detail) => {
+      console.log('delete');
     })
   );
 
