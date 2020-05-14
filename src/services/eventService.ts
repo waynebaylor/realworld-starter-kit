@@ -1,3 +1,5 @@
+import { ArticleDetails } from '../types';
+
 const createEvent = <T>(eventName: string, detail: T) => new CustomEvent(eventName, { bubbles: true, detail });
 
 const createListener = <T>(eventName: string, handler: (detail: T) => void): [string, any] => {
@@ -18,5 +20,8 @@ export const { event: unfavoritePostEvent, listener: unfavoritePostListener } = 
 export const { event: prevPageEvent, listener: prevPageListener } = createEventAndListener<void>('realworld.prev-page');
 export const { event: nextPageEvent, listener: nextPageListener } = createEventAndListener<void>('realworld.next-page');
 
+export const { event: articleCreatedEvent, listener: articleCreatedListener } = createEventAndListener<{ article: ArticleDetails }>(
+  'realworld.article-created'
+);
 export const { event: editArticleEvent, listener: editArticleListener } = createEventAndListener<{ slug: string }>('realworld.edit-article');
 export const { event: deleteArticleEvent, listener: deleteArticleListener } = createEventAndListener<{ slug: string }>('realworld.delete-article');

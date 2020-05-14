@@ -14,7 +14,7 @@ import {
   editArticleListener,
   deleteArticleListener,
 } from '../../services/eventService';
-import { getArticle } from '../../services/articleService';
+import { getArticle, deleteArticle } from '../../services/articleService';
 import { followUser, unfollowUser } from '../../services/followService';
 import { favoritePost, unfavoritePost } from '../../services/favoriteService';
 
@@ -75,7 +75,8 @@ export async function* Article(this: Context, { slug }: { slug: string }) {
 
   this.addEventListener(
     ...deleteArticleListener((detail) => {
-      console.log('delete');
+      deleteArticle(detail);
+      history.back();
     })
   );
 

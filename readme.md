@@ -8,6 +8,7 @@
 - GlobalFeed.tsx: for...of(this) when the component doesn't have any props
 - Feeds.tsx: watch() gets called before page() so we don't need to include a refresh()--if we did then the component would get rendered twice and make double the ajax requests.
 - ProfileFeedContent.tsx: using a props variable instead of destructuring leads to TypeError: \_a.next() is not a function, which is weird since it seems like it should work. also detecting if props have changed before making an ajax request is awkward.
+- NewPostNavLink.tsx: awaiting the refresh() before redirecting was surprising.
 
 # ![RealWorld Example App](logo.png)
 

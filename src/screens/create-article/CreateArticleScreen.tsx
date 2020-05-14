@@ -1,9 +1,9 @@
 /** @jsx createElement */
 import { createElement, Context, Fragment } from '@bikeshaving/crank';
 import { publish, SingleArticleResp } from '../../services/articleService';
-import page from 'page';
 import { Errors } from '../../components';
 import { ErrorResp } from '../../services';
+import { articleCreatedEvent } from '../../services/eventService';
 
 export async function* CreateArticleScreen(this: Context, { hide }: { hide(): void }) {
   let loading = false;
@@ -31,13 +31,14 @@ export async function* CreateArticleScreen(this: Context, { hide }: { hide(): vo
     hasErrors = resp.hasErrors;
     response = resp.response;
     if (!hasErrors) {
-      page(`/article/${(response as SingleArticleResp).article.slug}`);
+      const article = (response as SingleArticleResp).article;
+      this.dispatchEvent(articleCreatedEvent({ article }));
     }
 
     this.refresh();
   };
 
-  for await (let { hide } of this) {
+  for await ({ hide } of this) {
     yield (
       <form onsubmit={handleSubmit}>
         <div class="modal" style="display:block; background-color:rgba(0,0,0,0.5);">

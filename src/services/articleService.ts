@@ -70,3 +70,34 @@ export const getArticle = async (req: GetArticleReq): Promise<GetArticleResp> =>
     response: respJson,
   };
 };
+
+/**
+ * delete an article
+ */
+
+export interface DeleteArticleReq {
+  slug: string;
+}
+
+export type DeleteArticleResp = ServiceResp<void>;
+
+export const deleteArticle = async (req: DeleteArticleReq): Promise<DeleteArticleResp> => {
+  let headers = {};
+  if (isLoggedIn()) {
+    const user = getUser() as UserDetails;
+    headers = { Authorization: `Token ${user.token}` };
+  }
+
+  const resp = await fetch(`https://conduit.productionready.io/api/articles/${req.slug}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers,
+  });
+
+  const respJson = await resp.json();
+
+  return {
+    hasErrors: resp.status !== 200,
+    response: respJson,
+  };
+};
