@@ -101,3 +101,40 @@ export const deleteArticle = async (req: DeleteArticleReq): Promise<DeleteArticl
     response: respJson,
   };
 };
+
+/**
+ * edit an article
+ */
+
+export interface EditArticleReq {
+  slug: string;
+  title: string;
+  description: string;
+  body: string;
+  tagList: string[];
+}
+
+export type EditArticleResp = ServiceResp<SingleArticleResp>;
+
+export const editArticle = async (req: EditArticleReq): Promise<EditArticleResp> => {
+  const user = getUser() as UserDetails;
+  const slug = req.slug;
+  delete req.slug;
+
+  const resp = await fetch(`https://conduit.productionready.io/api/articles/${slug}`, {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${user.token}`,
+    },
+    body: JSON.stringify({ article: req }),
+  });
+
+  const respJson = await resp.json();
+
+  return {
+    hasErrors: resp.status !== 200,
+    response: respJson,
+  };
+};

@@ -23,5 +23,5 @@ export const { event: nextPageEvent, listener: nextPageListener } = createEventA
 export const { event: articleCreatedEvent, listener: articleCreatedListener } = createEventAndListener<{ article: ArticleDetails }>(
   'realworld.article-created'
 );
-export const { event: editArticleEvent, listener: editArticleListener } = createEventAndListener<{ slug: string }>('realworld.edit-article');
+export const { event: articleEditedEvent, listener: articleEditedListener } = createEventAndListener<{ slug: string }>('realworld.article-edited');
 export const { event: deleteArticleEvent, listener: deleteArticleListener } = createEventAndListener<{ slug: string }>('realworld.delete-article');

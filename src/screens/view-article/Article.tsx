@@ -1,22 +1,15 @@
 /** @jsx createElement */
-import { createElement, Context, Fragment } from '@bikeshaving/crank';
+import { Context, createElement } from '@bikeshaving/crank';
 import { LoadingIndicator } from '../../components';
+import { deleteArticle, getArticle } from '../../services/articleService';
+import { deleteArticleListener, favoritePostListener, followUserListener, unfavoritePostListener, unfollowUserListener } from '../../services/eventService';
+import { favoritePost, unfavoritePost } from '../../services/favoriteService';
+import { followUser, unfollowUser } from '../../services/followService';
+import { isLoggedIn } from '../../state/userState';
+import { ArticleActions } from './ArticleActions';
 import { ArticleBanner } from './ArticleBanner';
 import { ArticleContent } from './ArticleContent';
-import { ArticleActions } from './ArticleActions';
-import { isLoggedIn } from '../../state/userState';
 import { CommentSection } from './CommentSection';
-import {
-  followUserListener,
-  unfollowUserListener,
-  favoritePostListener,
-  unfavoritePostListener,
-  editArticleListener,
-  deleteArticleListener,
-} from '../../services/eventService';
-import { getArticle, deleteArticle } from '../../services/articleService';
-import { followUser, unfollowUser } from '../../services/followService';
-import { favoritePost, unfavoritePost } from '../../services/favoriteService';
 
 export async function* Article(this: Context, { slug }: { slug: string }) {
   yield (
@@ -64,12 +57,6 @@ export async function* Article(this: Context, { slug }: { slug: string }) {
       article.favorited = false;
       article.favoritesCount--;
       this.refresh();
-    })
-  );
-
-  this.addEventListener(
-    ...editArticleListener((detail) => {
-      console.log('edit');
     })
   );
 

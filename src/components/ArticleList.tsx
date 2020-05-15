@@ -51,7 +51,7 @@ export async function* ArticleList(this: Context, { articles: articlesProp }: { 
         </div>
         <a href={`/article/${article.slug}`} class="preview-link">
           <h1>{article.title}</h1>
-          <p>{article.body}</p>
+          <p>{article.description}</p>
           <span>Read more...</span>
           <ul class="tag-list">
             {article.tagList.map((tag) => (
