@@ -1,5 +1,6 @@
 {
   "name": "crankjs-realworld-example-app",
+  "homepage": "https://github.com/waynebaylor/realworld-starter-kit",
   "version": "1.0.0",
   "description": "crank.js implementation of the RealWorld Medium.com clone",
   "main": "index.js",
@@ -16,7 +17,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "start": "parcel src/index.html --hmr-port 1235",
-    "build-prod": "npm run clean && parcel build src/index.html"
+    "build-prod": "npm run clean && parcel build --public-url '/realworld-starter-kit' src/index.html"
   },
   "dependencies": {
     "@bikeshaving/crank": "0.1.2",
