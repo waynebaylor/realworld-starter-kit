@@ -1,15 +1,22 @@
 {
   "name": "crankjs-realworld-example-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "crank.js implementation of the RealWorld Medium.com clone",
   "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "crank.js",
+    "realworld"
+  ],
+  "author": "wayne baylor",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/waynebaylor/realworld-starter-kit.git"
+  },
   "scripts": {
-    "clean": "rm dist/bundle.js",
+    "clean": "rm -rf dist/",
     "start": "parcel src/index.html --hmr-port 1235",
-    "build-prod": "parcel build src/index.html"
+    "build-prod": "npm run clean && parcel build src/index.html"
   },
   "dependencies": {
     "@bikeshaving/crank": "0.1.2",
