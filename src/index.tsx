@@ -1,15 +1,17 @@
 /** @jsx createElement */
 import { createElement } from '@bikeshaving/crank';
-import './styles.scss';
 import page from 'page';
-import { HomeScreen, RegisterScreen, LoginScreen, SettingsScreen } from './screens';
-import { render } from './utils';
+import { HomeScreen, LoginScreen, RegisterScreen, SettingsScreen } from './screens';
+import { ProfileScreen } from './screens/profile';
 import { ViewArticleScreen } from './screens/view-article';
 import { logout } from './services/userService';
 import { setPageContext } from './state/pageContextState';
-import { ProfileScreen } from './screens/profile';
+import './styles.scss';
+import { render } from './utils';
 
-page.base('/realworld-starter-kit');
+if (process.env.NODE_ENV === 'production') {
+  page.base('/realworld-starter-kit');
+}
 
 page('/', (context) => {
   setPageContext(context);
