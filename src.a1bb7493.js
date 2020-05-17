@@ -6612,7 +6612,25 @@ function createState(initialState) {
     set: set
   };
 }
-},{"immer":"SSrD"}],"s2T4":[function(require,module,exports) {
+},{"immer":"SSrD"}],"Rf8a":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.linkHref = void 0;
+
+var linkHref = function linkHref(href) {
+  if ("production" === 'production') {
+    // this should match what's in src/index.tsx
+    return '/realworld-starter-kit' + href;
+  } else {
+    return href;
+  }
+};
+
+exports.linkHref = linkHref;
+},{}],"s2T4":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6642,7 +6660,19 @@ Object.keys(_createState).forEach(function (key) {
     }
   });
 });
-},{"./render":"TnIE","./createState":"lm5O"}],"qsQo":[function(require,module,exports) {
+
+var _linkHref = require("./linkHref");
+
+Object.keys(_linkHref).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _linkHref[key];
+    }
+  });
+});
+},{"./render":"TnIE","./createState":"lm5O","./linkHref":"Rf8a"}],"qsQo":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7079,6 +7109,8 @@ var _classnames = _interopRequireDefault(require("classnames"));
 
 var _NewPostNavLink = require("./NewPostNavLink");
 
+var _utils = require("../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
@@ -7303,7 +7335,7 @@ function Navbar(_a) {
             class: "container"
           }, (0, _crank.createElement)("a", {
             class: "navbar-brand",
-            href: "/"
+            href: (0, _utils.linkHref)('/')
           }, "conduit"), (0, _crank.createElement)("ul", {
             class: "nav navbar-nav pull-xs-right"
           }, (0, _crank.createElement)("li", {
@@ -7312,7 +7344,7 @@ function Navbar(_a) {
             class: (0, _classnames.default)('nav-link', {
               active: active === 'home'
             }),
-            href: "/"
+            href: (0, _utils.linkHref)('/')
           }, "Home")), (0, _userState.isLoggedIn)() && (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)("li", {
             class: "nav-item"
           }, (0, _crank.createElement)(_NewPostNavLink.NewPostNavLink, null)), (0, _crank.createElement)("li", {
@@ -7321,14 +7353,14 @@ function Navbar(_a) {
             class: (0, _classnames.default)('nav-link', {
               active: active === 'settings'
             }),
-            href: "/settings"
+            href: (0, _utils.linkHref)('/settings')
           }, (0, _crank.createElement)("i", {
             class: "ion-gear-a"
           }), "\xA0Settings")), (0, _crank.createElement)("li", {
             class: "nav-item"
           }, (0, _crank.createElement)("a", {
             class: "nav-link",
-            href: "/profile/" + user.username
+            href: (0, _utils.linkHref)("/profile/" + user.username)
           }, (0, _crank.createElement)("img", {
             src: user.image,
             class: "user-pic"
@@ -7336,21 +7368,21 @@ function Navbar(_a) {
             class: "nav-item"
           }, (0, _crank.createElement)("a", {
             class: "nav-link",
-            href: "/logout"
+            href: (0, _utils.linkHref)('/logout')
           }, "Log Out"))), !(0, _userState.isLoggedIn)() && (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)("li", {
             class: "nav-item"
           }, (0, _crank.createElement)("a", {
             class: (0, _classnames.default)('nav-link', {
               active: active === 'login'
             }),
-            href: "/login"
+            href: (0, _utils.linkHref)('/login')
           }, "Sign in")), (0, _crank.createElement)("li", {
             class: "nav-item"
           }, (0, _crank.createElement)("a", {
             class: (0, _classnames.default)('nav-link', {
               active: active === 'register'
             }),
-            href: "/register"
+            href: (0, _utils.linkHref)('/register')
           }, "Sign up")))))))];
 
         case 4:
@@ -7421,7 +7453,7 @@ function Navbar(_a) {
     });
   });
 }
-},{"@bikeshaving/crank":"k82I","../state/userState":"qsQo","classnames":"qb7c","./NewPostNavLink":"oXgt"}],"iVTS":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../state/userState":"qsQo","classnames":"qb7c","./NewPostNavLink":"oXgt","../utils":"s2T4"}],"iVTS":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
