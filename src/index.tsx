@@ -9,6 +9,8 @@ import { logout } from './services/userService';
 import { setPageContext } from './state/pageContextState';
 import { ProfileScreen } from './screens/profile';
 
+page.base('/realworld-starter-kit');
+
 page('/', (context) => {
   setPageContext(context);
   render(<HomeScreen />);

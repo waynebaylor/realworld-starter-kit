@@ -17,7 +17,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "start": "parcel src/index.html --hmr-port 1235",
-    "build-prod": "npm run clean && parcel build --public-url=https://waynebaylor.github.io/realworld-starter-kit/ src/index.html"
+    "build-prod": "npm run clean && parcel build --no-minify --no-source-maps --public-url=https://waynebaylor.github.io/realworld-starter-kit/ src/index.html"
   },
   "dependencies": {
     "@bikeshaving/crank": "0.1.2",
