@@ -3026,9 +3026,7 @@ Object.defineProperty(exports, "isElement", {
 });
 
 var _indexFf226fef = require("./index-ff226fef.js");
-},{"./index-ff226fef.js":"n6rD"}],"I4sy":[function(require,module,exports) {
-
-},{}],"pBGv":[function(require,module,exports) {
+},{"./index-ff226fef.js":"n6rD"}],"pBGv":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -12819,7 +12817,618 @@ Object.keys(_createArticle).forEach(function (key) {
     }
   });
 });
-},{"./home":"mRs3","./register":"lBz8","./login":"L1xL","./settings":"yZmL","./create-article":"CYJc"}],"tt01":[function(require,module,exports) {
+},{"./home":"mRs3","./register":"lBz8","./login":"L1xL","./settings":"yZmL","./create-article":"CYJc"}],"eAgI":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getProfile = void 0;
+
+var _userState = require("../state/userState");
+
+/**
+ * get a user profile
+ */
+var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var getProfile = function getProfile(_a) {
+  var username = _a.username;
+  return __awaiter(void 0, void 0, Promise, function () {
+    var headers, user, resp, respObj;
+    return __generator(this, function (_b) {
+      switch (_b.label) {
+        case 0:
+          headers = {};
+
+          if ((0, _userState.isLoggedIn)()) {
+            user = (0, _userState.getUser)();
+            headers = {
+              Authorization: "Token " + user.token
+            };
+          }
+
+          return [4
+          /*yield*/
+          , fetch("https://conduit.productionready.io/api/profiles/" + username, {
+            method: 'GET',
+            mode: 'cors',
+            headers: headers
+          })];
+
+        case 1:
+          resp = _b.sent();
+          return [4
+          /*yield*/
+          , resp.json()];
+
+        case 2:
+          respObj = _b.sent();
+          return [2
+          /*return*/
+          , {
+            hasErrors: resp.status !== 200,
+            response: respObj
+          }];
+      }
+    });
+  });
+};
+
+exports.getProfile = getProfile;
+},{"../state/userState":"qsQo"}],"WGRC":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProfileFeedContent = ProfileFeedContent;
+
+var _crank = require("@bikeshaving/crank");
+
+var _components = require("../../components");
+
+var _ArticleFeed = require("../../components/ArticleFeed");
+
+var _feedService = require("../../services/feedService");
+
+var __assign = void 0 && (void 0).__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var __asyncValues = void 0 && (void 0).__asyncValues || function (o) {
+  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+  var m = o[Symbol.asyncIterator],
+      i;
+  return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
+    return this;
+  }, i);
+
+  function verb(n) {
+    i[n] = o[n] && function (v) {
+      return new Promise(function (resolve, reject) {
+        v = o[n](v), settle(resolve, reject, v.done, v.value);
+      });
+    };
+  }
+
+  function settle(resolve, reject, d, v) {
+    Promise.resolve(v).then(function (v) {
+      resolve({
+        value: v,
+        done: d
+      });
+    }, reject);
+  }
+};
+
+var __await = void 0 && (void 0).__await || function (v) {
+  return this instanceof __await ? (this.v = v, this) : new __await(v);
+};
+
+var __asyncGenerator = void 0 && (void 0).__asyncGenerator || function (thisArg, _arguments, generator) {
+  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+  var g = generator.apply(thisArg, _arguments || []),
+      i,
+      q = [];
+  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
+    return this;
+  }, i;
+
+  function verb(n) {
+    if (g[n]) i[n] = function (v) {
+      return new Promise(function (a, b) {
+        q.push([n, v, a, b]) > 1 || resume(n, v);
+      });
+    };
+  }
+
+  function resume(n, v) {
+    try {
+      step(g[n](v));
+    } catch (e) {
+      settle(q[0][3], e);
+    }
+  }
+
+  function step(r) {
+    r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+  }
+
+  function fulfill(value) {
+    resume("next", value);
+  }
+
+  function reject(value) {
+    resume("throw", value);
+  }
+
+  function settle(f, v) {
+    if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
+  }
+};
+/** @jsx createElement */
+
+
+function ProfileFeedContent(_a) {
+  var username = _a.username,
+      feed = _a.feed,
+      limit = _a.limit,
+      offset = _a.offset;
+
+  var _b, _c;
+
+  return __asyncGenerator(this, arguments, function ProfileFeedContent_1() {
+    var prevProps, articles, articlesCount, prevDisabled, nextDisabled, _a, _b, propsChanged, resp, _c, e_1_1;
+
+    var _d;
+
+    var e_1, _e;
+
+    return __generator(this, function (_f) {
+      switch (_f.label) {
+        case 0:
+          prevProps = {
+            username: username,
+            feed: feed,
+            limit: limit,
+            offset: offset
+          };
+          articles = null;
+          articlesCount = 0;
+          prevDisabled = false;
+          nextDisabled = false;
+          _f.label = 1;
+
+        case 1:
+          _f.trys.push([1, 15, 16, 21]);
+
+          _a = __asyncValues(this);
+          _f.label = 2;
+
+        case 2:
+          return [4
+          /*yield*/
+          , __await(_a.next())];
+
+        case 3:
+          if (!(_b = _f.sent(), !_b.done)) return [3
+          /*break*/
+          , 14];
+          _d = _b.value, username = _d.username, feed = _d.feed, limit = _d.limit, offset = _d.offset;
+          propsChanged = username !== prevProps.username || feed !== prevProps.feed || limit !== prevProps.limit || offset !== prevProps.offset;
+          if (!(articles == null || propsChanged)) return [3
+          /*break*/
+          , 10];
+          prevProps = {
+            username: username,
+            feed: feed,
+            limit: limit,
+            offset: offset
+          };
+          return [4
+          /*yield*/
+          , __await((0, _crank.createElement)("div", {
+            style: "display:flex; justify-content:center; margin:50px;"
+          }, (0, _crank.createElement)(_components.LoadingIndicator, null)))];
+
+        case 4:
+          return [4
+          /*yield*/
+          , _f.sent()];
+
+        case 5:
+          _f.sent();
+
+          if (!(feed === 'my')) return [3
+          /*break*/
+          , 7];
+          return [4
+          /*yield*/
+          , __await((0, _feedService.getFeedArticles)({
+            author: username,
+            limit: limit,
+            offset: offset
+          }))];
+
+        case 6:
+          _c = _f.sent();
+          return [3
+          /*break*/
+          , 9];
+
+        case 7:
+          return [4
+          /*yield*/
+          , __await((0, _feedService.getFeedArticles)({
+            favorited: username,
+            limit: limit,
+            offset: offset
+          }))];
+
+        case 8:
+          _c = _f.sent();
+          _f.label = 9;
+
+        case 9:
+          resp = _c;
+
+          if (resp.hasErrors) {
+            throw new Error('Error getting feed.');
+          }
+
+          articles = (_b = resp.response) === null || _b === void 0 ? void 0 : _b.articles;
+          articlesCount = (_c = resp.response) === null || _c === void 0 ? void 0 : _c.articlesCount;
+          prevDisabled = offset === 0;
+          nextDisabled = offset + limit >= articlesCount;
+          _f.label = 10;
+
+        case 10:
+          return [4
+          /*yield*/
+          , __await((0, _crank.createElement)(_crank.Fragment, null, feed === 'my' && (0, _crank.createElement)(_ArticleFeed.ArticleFeed, __assign({}, {
+            articles: articles,
+            prevDisabled: prevDisabled,
+            nextDisabled: nextDisabled
+          })), feed === 'favorited' && (0, _crank.createElement)(_ArticleFeed.ArticleFeed, __assign({}, {
+            articles: articles,
+            prevDisabled: prevDisabled,
+            nextDisabled: nextDisabled
+          }))))];
+
+        case 11:
+          return [4
+          /*yield*/
+          , _f.sent()];
+
+        case 12:
+          _f.sent();
+
+          _f.label = 13;
+
+        case 13:
+          return [3
+          /*break*/
+          , 2];
+
+        case 14:
+          return [3
+          /*break*/
+          , 21];
+
+        case 15:
+          e_1_1 = _f.sent();
+          e_1 = {
+            error: e_1_1
+          };
+          return [3
+          /*break*/
+          , 21];
+
+        case 16:
+          _f.trys.push([16,, 19, 20]);
+
+          if (!(_b && !_b.done && (_e = _a.return))) return [3
+          /*break*/
+          , 18];
+          return [4
+          /*yield*/
+          , __await(_e.call(_a))];
+
+        case 17:
+          _f.sent();
+
+          _f.label = 18;
+
+        case 18:
+          return [3
+          /*break*/
+          , 20];
+
+        case 19:
+          if (e_1) throw e_1.error;
+          return [7
+          /*endfinally*/
+          ];
+
+        case 20:
+          return [7
+          /*endfinally*/
+          ];
+
+        case 21:
+          return [2
+          /*return*/
+          ];
+      }
+    });
+  });
+}
+},{"@bikeshaving/crank":"k82I","../../components":"iVTS","../../components/ArticleFeed":"v5Vp","../../services/feedService":"n69M"}],"tt01":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13049,7 +13658,545 @@ var unfollowUser = function unfollowUser(_a) {
 };
 
 exports.unfollowUser = unfollowUser;
-},{"../state/userState":"qsQo"}],"Isjr":[function(require,module,exports) {
+},{"../state/userState":"qsQo"}],"pGCg":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProfileFeeds = ProfileFeeds;
+
+var _crank = require("@bikeshaving/crank");
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _components = require("../../components");
+
+var _profileService = require("../../services/profileService");
+
+var _pageContextState = require("../../state/pageContextState");
+
+var _ProfileFeedContent = require("./ProfileFeedContent");
+
+var _eventService = require("../../services/eventService");
+
+var _followService = require("../../services/followService");
+
+var qs = _interopRequireWildcard(require("query-string"));
+
+var _userState = require("../../state/userState");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var __assign = void 0 && (void 0).__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var __asyncValues = void 0 && (void 0).__asyncValues || function (o) {
+  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+  var m = o[Symbol.asyncIterator],
+      i;
+  return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
+    return this;
+  }, i);
+
+  function verb(n) {
+    i[n] = o[n] && function (v) {
+      return new Promise(function (resolve, reject) {
+        v = o[n](v), settle(resolve, reject, v.done, v.value);
+      });
+    };
+  }
+
+  function settle(resolve, reject, d, v) {
+    Promise.resolve(v).then(function (v) {
+      resolve({
+        value: v,
+        done: d
+      });
+    }, reject);
+  }
+};
+
+var __await = void 0 && (void 0).__await || function (v) {
+  return this instanceof __await ? (this.v = v, this) : new __await(v);
+};
+
+var __asyncGenerator = void 0 && (void 0).__asyncGenerator || function (thisArg, _arguments, generator) {
+  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+  var g = generator.apply(thisArg, _arguments || []),
+      i,
+      q = [];
+  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
+    return this;
+  }, i;
+
+  function verb(n) {
+    if (g[n]) i[n] = function (v) {
+      return new Promise(function (a, b) {
+        q.push([n, v, a, b]) > 1 || resume(n, v);
+      });
+    };
+  }
+
+  function resume(n, v) {
+    try {
+      step(g[n](v));
+    } catch (e) {
+      settle(q[0][3], e);
+    }
+  }
+
+  function step(r) {
+    r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+  }
+
+  function fulfill(value) {
+    resume("next", value);
+  }
+
+  function reject(value) {
+    resume("throw", value);
+  }
+
+  function settle(f, v) {
+    if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
+  }
+};
+
+var __read = void 0 && (void 0).__read || function (o, n) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m) return o;
+  var i = m.call(o),
+      r,
+      ar = [],
+      e;
+
+  try {
+    while ((n === void 0 || n-- > 0) && !(r = i.next()).done) {
+      ar.push(r.value);
+    }
+  } catch (error) {
+    e = {
+      error: error
+    };
+  } finally {
+    try {
+      if (r && !r.done && (m = i["return"])) m.call(i);
+    } finally {
+      if (e) throw e.error;
+    }
+  }
+
+  return ar;
+};
+
+var __spread = void 0 && (void 0).__spread || function () {
+  for (var ar = [], i = 0; i < arguments.length; i++) {
+    ar = ar.concat(__read(arguments[i]));
+  }
+
+  return ar;
+};
+/** @jsx createElement */
+
+
+var getUsername = function getUsername() {
+  return (0, _pageContextState.getPageContext)().params.username;
+};
+
+function ProfileFeeds(_a) {
+  return __asyncGenerator(this, arguments, function ProfileFeeds_1() {
+    var loggedInUser, username, _a, _b, feed, _c, limit, _d, offset, limitParam, offsetParam, profile, _e, _f, resp, e_1_1;
+
+    var _this = this;
+
+    var e_1, _g;
+
+    return __generator(this, function (_h) {
+      switch (_h.label) {
+        case 0:
+          loggedInUser = (0, _userState.getUser)();
+          username = getUsername();
+          _a = (0, _pageContextState.getQueryParams)(), _b = _a.feed, feed = _b === void 0 ? 'my' : _b, _c = _a.limit, limit = _c === void 0 ? '10' : _c, _d = _a.offset, offset = _d === void 0 ? '0' : _d;
+          limitParam = +limit;
+          offsetParam = +offset;
+          profile = null;
+          (0, _pageContextState.watchPageContext)(function () {
+            var _a, _b, _c, _d;
+
+            username = getUsername();
+            _a = (0, _pageContextState.getQueryParams)(), _b = _a.feed, feed = _b === void 0 ? 'my' : _b, _c = _a.limit, limit = _c === void 0 ? '10' : _c, _d = _a.offset, offset = _d === void 0 ? '0' : _d;
+            limitParam = +limit;
+            offsetParam = +offset; // don't need to call this.refresh()
+          });
+          this.addEventListener.apply(this, __spread((0, _eventService.followUserListener)(function (detail) {
+            (0, _followService.followUser)(detail);
+            profile.following = true;
+
+            _this.refresh();
+          })));
+          this.addEventListener.apply(this, __spread((0, _eventService.unfollowUserListener)(function (detail) {
+            (0, _followService.unfollowUser)(detail);
+            profile.following = false;
+
+            _this.refresh();
+          })));
+          this.addEventListener.apply(this, __spread((0, _eventService.prevPageListener)(function () {
+            offsetParam = Math.max(0, offsetParam -= limitParam);
+            var pathname = (0, _pageContextState.getPageContext)().pathname;
+
+            var qp = __assign(__assign({}, (0, _pageContextState.getQueryParams)()), {
+              offset: offsetParam
+            });
+
+            page(pathname + "?" + qs.stringify(qp));
+          })));
+          this.addEventListener.apply(this, __spread((0, _eventService.nextPageListener)(function () {
+            offsetParam += limitParam;
+            var pathname = (0, _pageContextState.getPageContext)().pathname;
+
+            var qp = __assign(__assign({}, (0, _pageContextState.getQueryParams)()), {
+              offset: offsetParam
+            });
+
+            page(pathname + "?" + qs.stringify(qp));
+          })));
+          _h.label = 1;
+
+        case 1:
+          _h.trys.push([1, 12, 13, 18]);
+
+          _e = __asyncValues(this);
+          _h.label = 2;
+
+        case 2:
+          return [4
+          /*yield*/
+          , __await(_e.next())];
+
+        case 3:
+          if (!(_f = _h.sent(), !_f.done)) return [3
+          /*break*/
+          , 11];
+          _f.value;
+          if (!(username !== (profile === null || profile === void 0 ? void 0 : profile.username))) return [3
+          /*break*/
+          , 7];
+          return [4
+          /*yield*/
+          , __await((0, _crank.createElement)("div", {
+            style: "display:flex; justify-content:center; margin:50px;"
+          }, (0, _crank.createElement)(_components.LoadingIndicator, null)))];
+
+        case 4:
+          return [4
+          /*yield*/
+          , _h.sent()];
+
+        case 5:
+          _h.sent();
+
+          return [4
+          /*yield*/
+          , __await((0, _profileService.getProfile)({
+            username: username
+          }))];
+
+        case 6:
+          resp = _h.sent();
+
+          if (resp.hasErrors) {
+            throw new Error('Error getting profile.');
+          }
+
+          profile = resp.response.profile;
+          _h.label = 7;
+
+        case 7:
+          return [4
+          /*yield*/
+          , __await((0, _crank.createElement)("div", {
+            class: "profile-page"
+          }, (0, _crank.createElement)("div", {
+            class: "user-info"
+          }, (0, _crank.createElement)("div", {
+            class: "container"
+          }, (0, _crank.createElement)("div", {
+            class: "row"
+          }, (0, _crank.createElement)("div", {
+            class: "col-xs-12 col-md-10 offset-md-1"
+          }, (0, _crank.createElement)("img", {
+            src: profile.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
+            class: "user-img"
+          }), (0, _crank.createElement)("h4", null, profile.username), (0, _crank.createElement)("p", null, profile.bio), (loggedInUser === null || loggedInUser === void 0 ? void 0 : loggedInUser.username) !== username && (0, _crank.createElement)(_components.FollowUserButton, {
+            username: profile.username,
+            following: profile.following
+          }))))), (0, _crank.createElement)("div", {
+            class: "container"
+          }, (0, _crank.createElement)("div", {
+            class: "row"
+          }, (0, _crank.createElement)("div", {
+            class: "col-xs-12 col-md-10 offset-md-1"
+          }, (0, _crank.createElement)("div", {
+            class: "articles-toggle"
+          }, (0, _crank.createElement)("ul", {
+            class: "nav nav-pills outline-active"
+          }, (0, _crank.createElement)("li", {
+            class: "nav-item"
+          }, (0, _crank.createElement)("a", {
+            class: (0, _classnames.default)('nav-link', {
+              active: feed === 'my'
+            }),
+            href: "/profile/" + profile.username + "?feed=my"
+          }, "My Articles")), (0, _crank.createElement)("li", {
+            class: "nav-item"
+          }, (0, _crank.createElement)("a", {
+            class: (0, _classnames.default)('nav-link', {
+              active: feed === 'favorited'
+            }),
+            href: "/profile/" + profile.username + "?feed=favorited"
+          }, "Favorited Articles")))), (0, _crank.createElement)(_ProfileFeedContent.ProfileFeedContent, {
+            username: username,
+            feed: feed,
+            limit: limitParam,
+            offset: offsetParam
+          }))))))];
+
+        case 8:
+          return [4
+          /*yield*/
+          , _h.sent()];
+
+        case 9:
+          _h.sent();
+
+          _h.label = 10;
+
+        case 10:
+          return [3
+          /*break*/
+          , 2];
+
+        case 11:
+          return [3
+          /*break*/
+          , 18];
+
+        case 12:
+          e_1_1 = _h.sent();
+          e_1 = {
+            error: e_1_1
+          };
+          return [3
+          /*break*/
+          , 18];
+
+        case 13:
+          _h.trys.push([13,, 16, 17]);
+
+          if (!(_f && !_f.done && (_g = _e.return))) return [3
+          /*break*/
+          , 15];
+          return [4
+          /*yield*/
+          , __await(_g.call(_e))];
+
+        case 14:
+          _h.sent();
+
+          _h.label = 15;
+
+        case 15:
+          return [3
+          /*break*/
+          , 17];
+
+        case 16:
+          if (e_1) throw e_1.error;
+          return [7
+          /*endfinally*/
+          ];
+
+        case 17:
+          return [7
+          /*endfinally*/
+          ];
+
+        case 18:
+          return [2
+          /*return*/
+          ];
+      }
+    });
+  });
+}
+},{"@bikeshaving/crank":"k82I","classnames":"qb7c","../../components":"iVTS","../../services/profileService":"eAgI","../../state/pageContextState":"ubNH","./ProfileFeedContent":"WGRC","../../services/eventService":"fkvO","../../services/followService":"tt01","query-string":"FvpG","../../state/userState":"qsQo"}],"z5ec":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProfileScreen = ProfileScreen;
+
+var _crank = require("@bikeshaving/crank");
+
+var _components = require("../../components");
+
+var _ProfileFeeds = require("./ProfileFeeds");
+
+/** @jsx createElement */
+function ProfileScreen() {
+  return (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)(_components.Navbar, {
+    active: ""
+  }), (0, _crank.createElement)(_ProfileFeeds.ProfileFeeds, null), (0, _crank.createElement)(_components.Footer, null));
+}
+},{"@bikeshaving/crank":"k82I","../../components":"iVTS","./ProfileFeeds":"pGCg"}],"SXbb":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _ProfileScreen = require("./ProfileScreen");
+
+Object.keys(_ProfileScreen).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _ProfileScreen[key];
+    }
+  });
+});
+},{"./ProfileScreen":"z5ec"}],"Isjr":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19246,1167 +20393,18 @@ Object.keys(_ViewArticleScreen).forEach(function (key) {
     }
   });
 });
-},{"./ViewArticleScreen":"w8yd"}],"eAgI":[function(require,module,exports) {
-"use strict";
+},{"./ViewArticleScreen":"w8yd"}],"I4sy":[function(require,module,exports) {
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getProfile = void 0;
-
-var _userState = require("../state/userState");
-
-/**
- * get a user profile
- */
-var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var getProfile = function getProfile(_a) {
-  var username = _a.username;
-  return __awaiter(void 0, void 0, Promise, function () {
-    var headers, user, resp, respObj;
-    return __generator(this, function (_b) {
-      switch (_b.label) {
-        case 0:
-          headers = {};
-
-          if ((0, _userState.isLoggedIn)()) {
-            user = (0, _userState.getUser)();
-            headers = {
-              Authorization: "Token " + user.token
-            };
-          }
-
-          return [4
-          /*yield*/
-          , fetch("https://conduit.productionready.io/api/profiles/" + username, {
-            method: 'GET',
-            mode: 'cors',
-            headers: headers
-          })];
-
-        case 1:
-          resp = _b.sent();
-          return [4
-          /*yield*/
-          , resp.json()];
-
-        case 2:
-          respObj = _b.sent();
-          return [2
-          /*return*/
-          , {
-            hasErrors: resp.status !== 200,
-            response: respObj
-          }];
-      }
-    });
-  });
-};
-
-exports.getProfile = getProfile;
-},{"../state/userState":"qsQo"}],"WGRC":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ProfileFeedContent = ProfileFeedContent;
-
-var _crank = require("@bikeshaving/crank");
-
-var _components = require("../../components");
-
-var _ArticleFeed = require("../../components/ArticleFeed");
-
-var _feedService = require("../../services/feedService");
-
-var __assign = void 0 && (void 0).__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
-var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var __asyncValues = void 0 && (void 0).__asyncValues || function (o) {
-  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-  var m = o[Symbol.asyncIterator],
-      i;
-  return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
-    return this;
-  }, i);
-
-  function verb(n) {
-    i[n] = o[n] && function (v) {
-      return new Promise(function (resolve, reject) {
-        v = o[n](v), settle(resolve, reject, v.done, v.value);
-      });
-    };
-  }
-
-  function settle(resolve, reject, d, v) {
-    Promise.resolve(v).then(function (v) {
-      resolve({
-        value: v,
-        done: d
-      });
-    }, reject);
-  }
-};
-
-var __await = void 0 && (void 0).__await || function (v) {
-  return this instanceof __await ? (this.v = v, this) : new __await(v);
-};
-
-var __asyncGenerator = void 0 && (void 0).__asyncGenerator || function (thisArg, _arguments, generator) {
-  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-  var g = generator.apply(thisArg, _arguments || []),
-      i,
-      q = [];
-  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
-    return this;
-  }, i;
-
-  function verb(n) {
-    if (g[n]) i[n] = function (v) {
-      return new Promise(function (a, b) {
-        q.push([n, v, a, b]) > 1 || resume(n, v);
-      });
-    };
-  }
-
-  function resume(n, v) {
-    try {
-      step(g[n](v));
-    } catch (e) {
-      settle(q[0][3], e);
-    }
-  }
-
-  function step(r) {
-    r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
-  }
-
-  function fulfill(value) {
-    resume("next", value);
-  }
-
-  function reject(value) {
-    resume("throw", value);
-  }
-
-  function settle(f, v) {
-    if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
-  }
-};
-/** @jsx createElement */
-
-
-function ProfileFeedContent(_a) {
-  var username = _a.username,
-      feed = _a.feed,
-      limit = _a.limit,
-      offset = _a.offset;
-
-  var _b, _c;
-
-  return __asyncGenerator(this, arguments, function ProfileFeedContent_1() {
-    var prevProps, articles, articlesCount, prevDisabled, nextDisabled, _a, _b, propsChanged, resp, _c, e_1_1;
-
-    var _d;
-
-    var e_1, _e;
-
-    return __generator(this, function (_f) {
-      switch (_f.label) {
-        case 0:
-          prevProps = {
-            username: username,
-            feed: feed,
-            limit: limit,
-            offset: offset
-          };
-          articles = null;
-          articlesCount = 0;
-          prevDisabled = false;
-          nextDisabled = false;
-          _f.label = 1;
-
-        case 1:
-          _f.trys.push([1, 15, 16, 21]);
-
-          _a = __asyncValues(this);
-          _f.label = 2;
-
-        case 2:
-          return [4
-          /*yield*/
-          , __await(_a.next())];
-
-        case 3:
-          if (!(_b = _f.sent(), !_b.done)) return [3
-          /*break*/
-          , 14];
-          _d = _b.value, username = _d.username, feed = _d.feed, limit = _d.limit, offset = _d.offset;
-          propsChanged = username !== prevProps.username || feed !== prevProps.feed || limit !== prevProps.limit || offset !== prevProps.offset;
-          if (!(articles == null || propsChanged)) return [3
-          /*break*/
-          , 10];
-          prevProps = {
-            username: username,
-            feed: feed,
-            limit: limit,
-            offset: offset
-          };
-          return [4
-          /*yield*/
-          , __await((0, _crank.createElement)("div", {
-            style: "display:flex; justify-content:center; margin:50px;"
-          }, (0, _crank.createElement)(_components.LoadingIndicator, null)))];
-
-        case 4:
-          return [4
-          /*yield*/
-          , _f.sent()];
-
-        case 5:
-          _f.sent();
-
-          if (!(feed === 'my')) return [3
-          /*break*/
-          , 7];
-          return [4
-          /*yield*/
-          , __await((0, _feedService.getFeedArticles)({
-            author: username,
-            limit: limit,
-            offset: offset
-          }))];
-
-        case 6:
-          _c = _f.sent();
-          return [3
-          /*break*/
-          , 9];
-
-        case 7:
-          return [4
-          /*yield*/
-          , __await((0, _feedService.getFeedArticles)({
-            favorited: username,
-            limit: limit,
-            offset: offset
-          }))];
-
-        case 8:
-          _c = _f.sent();
-          _f.label = 9;
-
-        case 9:
-          resp = _c;
-
-          if (resp.hasErrors) {
-            throw new Error('Error getting feed.');
-          }
-
-          articles = (_b = resp.response) === null || _b === void 0 ? void 0 : _b.articles;
-          articlesCount = (_c = resp.response) === null || _c === void 0 ? void 0 : _c.articlesCount;
-          prevDisabled = offset === 0;
-          nextDisabled = offset + limit >= articlesCount;
-          _f.label = 10;
-
-        case 10:
-          return [4
-          /*yield*/
-          , __await((0, _crank.createElement)(_crank.Fragment, null, feed === 'my' && (0, _crank.createElement)(_ArticleFeed.ArticleFeed, __assign({}, {
-            articles: articles,
-            prevDisabled: prevDisabled,
-            nextDisabled: nextDisabled
-          })), feed === 'favorited' && (0, _crank.createElement)(_ArticleFeed.ArticleFeed, __assign({}, {
-            articles: articles,
-            prevDisabled: prevDisabled,
-            nextDisabled: nextDisabled
-          }))))];
-
-        case 11:
-          return [4
-          /*yield*/
-          , _f.sent()];
-
-        case 12:
-          _f.sent();
-
-          _f.label = 13;
-
-        case 13:
-          return [3
-          /*break*/
-          , 2];
-
-        case 14:
-          return [3
-          /*break*/
-          , 21];
-
-        case 15:
-          e_1_1 = _f.sent();
-          e_1 = {
-            error: e_1_1
-          };
-          return [3
-          /*break*/
-          , 21];
-
-        case 16:
-          _f.trys.push([16,, 19, 20]);
-
-          if (!(_b && !_b.done && (_e = _a.return))) return [3
-          /*break*/
-          , 18];
-          return [4
-          /*yield*/
-          , __await(_e.call(_a))];
-
-        case 17:
-          _f.sent();
-
-          _f.label = 18;
-
-        case 18:
-          return [3
-          /*break*/
-          , 20];
-
-        case 19:
-          if (e_1) throw e_1.error;
-          return [7
-          /*endfinally*/
-          ];
-
-        case 20:
-          return [7
-          /*endfinally*/
-          ];
-
-        case 21:
-          return [2
-          /*return*/
-          ];
-      }
-    });
-  });
-}
-},{"@bikeshaving/crank":"k82I","../../components":"iVTS","../../components/ArticleFeed":"v5Vp","../../services/feedService":"n69M"}],"pGCg":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ProfileFeeds = ProfileFeeds;
-
-var _crank = require("@bikeshaving/crank");
-
-var _classnames = _interopRequireDefault(require("classnames"));
-
-var _components = require("../../components");
-
-var _profileService = require("../../services/profileService");
-
-var _pageContextState = require("../../state/pageContextState");
-
-var _ProfileFeedContent = require("./ProfileFeedContent");
-
-var _eventService = require("../../services/eventService");
-
-var _followService = require("../../services/followService");
-
-var qs = _interopRequireWildcard(require("query-string"));
-
-var _userState = require("../../state/userState");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var __assign = void 0 && (void 0).__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
-var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var __asyncValues = void 0 && (void 0).__asyncValues || function (o) {
-  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-  var m = o[Symbol.asyncIterator],
-      i;
-  return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
-    return this;
-  }, i);
-
-  function verb(n) {
-    i[n] = o[n] && function (v) {
-      return new Promise(function (resolve, reject) {
-        v = o[n](v), settle(resolve, reject, v.done, v.value);
-      });
-    };
-  }
-
-  function settle(resolve, reject, d, v) {
-    Promise.resolve(v).then(function (v) {
-      resolve({
-        value: v,
-        done: d
-      });
-    }, reject);
-  }
-};
-
-var __await = void 0 && (void 0).__await || function (v) {
-  return this instanceof __await ? (this.v = v, this) : new __await(v);
-};
-
-var __asyncGenerator = void 0 && (void 0).__asyncGenerator || function (thisArg, _arguments, generator) {
-  if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-  var g = generator.apply(thisArg, _arguments || []),
-      i,
-      q = [];
-  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
-    return this;
-  }, i;
-
-  function verb(n) {
-    if (g[n]) i[n] = function (v) {
-      return new Promise(function (a, b) {
-        q.push([n, v, a, b]) > 1 || resume(n, v);
-      });
-    };
-  }
-
-  function resume(n, v) {
-    try {
-      step(g[n](v));
-    } catch (e) {
-      settle(q[0][3], e);
-    }
-  }
-
-  function step(r) {
-    r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
-  }
-
-  function fulfill(value) {
-    resume("next", value);
-  }
-
-  function reject(value) {
-    resume("throw", value);
-  }
-
-  function settle(f, v) {
-    if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
-  }
-};
-
-var __read = void 0 && (void 0).__read || function (o, n) {
-  var m = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m) return o;
-  var i = m.call(o),
-      r,
-      ar = [],
-      e;
-
-  try {
-    while ((n === void 0 || n-- > 0) && !(r = i.next()).done) {
-      ar.push(r.value);
-    }
-  } catch (error) {
-    e = {
-      error: error
-    };
-  } finally {
-    try {
-      if (r && !r.done && (m = i["return"])) m.call(i);
-    } finally {
-      if (e) throw e.error;
-    }
-  }
-
-  return ar;
-};
-
-var __spread = void 0 && (void 0).__spread || function () {
-  for (var ar = [], i = 0; i < arguments.length; i++) {
-    ar = ar.concat(__read(arguments[i]));
-  }
-
-  return ar;
-};
-/** @jsx createElement */
-
-
-var getUsername = function getUsername() {
-  return (0, _pageContextState.getPageContext)().params.username;
-};
-
-function ProfileFeeds(_a) {
-  return __asyncGenerator(this, arguments, function ProfileFeeds_1() {
-    var loggedInUser, username, _a, _b, feed, _c, limit, _d, offset, limitParam, offsetParam, profile, _e, _f, resp, e_1_1;
-
-    var _this = this;
-
-    var e_1, _g;
-
-    return __generator(this, function (_h) {
-      switch (_h.label) {
-        case 0:
-          loggedInUser = (0, _userState.getUser)();
-          username = getUsername();
-          _a = (0, _pageContextState.getQueryParams)(), _b = _a.feed, feed = _b === void 0 ? 'my' : _b, _c = _a.limit, limit = _c === void 0 ? '10' : _c, _d = _a.offset, offset = _d === void 0 ? '0' : _d;
-          limitParam = +limit;
-          offsetParam = +offset;
-          profile = null;
-          (0, _pageContextState.watchPageContext)(function () {
-            var _a, _b, _c, _d;
-
-            username = getUsername();
-            _a = (0, _pageContextState.getQueryParams)(), _b = _a.feed, feed = _b === void 0 ? 'my' : _b, _c = _a.limit, limit = _c === void 0 ? '10' : _c, _d = _a.offset, offset = _d === void 0 ? '0' : _d;
-            limitParam = +limit;
-            offsetParam = +offset; // don't need to call this.refresh()
-          });
-          this.addEventListener.apply(this, __spread((0, _eventService.followUserListener)(function (detail) {
-            (0, _followService.followUser)(detail);
-            profile.following = true;
-
-            _this.refresh();
-          })));
-          this.addEventListener.apply(this, __spread((0, _eventService.unfollowUserListener)(function (detail) {
-            (0, _followService.unfollowUser)(detail);
-            profile.following = false;
-
-            _this.refresh();
-          })));
-          this.addEventListener.apply(this, __spread((0, _eventService.prevPageListener)(function () {
-            offsetParam = Math.max(0, offsetParam -= limitParam);
-            var pathname = (0, _pageContextState.getPageContext)().pathname;
-
-            var qp = __assign(__assign({}, (0, _pageContextState.getQueryParams)()), {
-              offset: offsetParam
-            });
-
-            page(pathname + "?" + qs.stringify(qp));
-          })));
-          this.addEventListener.apply(this, __spread((0, _eventService.nextPageListener)(function () {
-            offsetParam += limitParam;
-            var pathname = (0, _pageContextState.getPageContext)().pathname;
-
-            var qp = __assign(__assign({}, (0, _pageContextState.getQueryParams)()), {
-              offset: offsetParam
-            });
-
-            page(pathname + "?" + qs.stringify(qp));
-          })));
-          _h.label = 1;
-
-        case 1:
-          _h.trys.push([1, 12, 13, 18]);
-
-          _e = __asyncValues(this);
-          _h.label = 2;
-
-        case 2:
-          return [4
-          /*yield*/
-          , __await(_e.next())];
-
-        case 3:
-          if (!(_f = _h.sent(), !_f.done)) return [3
-          /*break*/
-          , 11];
-          _f.value;
-          if (!(username !== (profile === null || profile === void 0 ? void 0 : profile.username))) return [3
-          /*break*/
-          , 7];
-          return [4
-          /*yield*/
-          , __await((0, _crank.createElement)("div", {
-            style: "display:flex; justify-content:center; margin:50px;"
-          }, (0, _crank.createElement)(_components.LoadingIndicator, null)))];
-
-        case 4:
-          return [4
-          /*yield*/
-          , _h.sent()];
-
-        case 5:
-          _h.sent();
-
-          return [4
-          /*yield*/
-          , __await((0, _profileService.getProfile)({
-            username: username
-          }))];
-
-        case 6:
-          resp = _h.sent();
-
-          if (resp.hasErrors) {
-            throw new Error('Error getting profile.');
-          }
-
-          profile = resp.response.profile;
-          _h.label = 7;
-
-        case 7:
-          return [4
-          /*yield*/
-          , __await((0, _crank.createElement)("div", {
-            class: "profile-page"
-          }, (0, _crank.createElement)("div", {
-            class: "user-info"
-          }, (0, _crank.createElement)("div", {
-            class: "container"
-          }, (0, _crank.createElement)("div", {
-            class: "row"
-          }, (0, _crank.createElement)("div", {
-            class: "col-xs-12 col-md-10 offset-md-1"
-          }, (0, _crank.createElement)("img", {
-            src: profile.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
-            class: "user-img"
-          }), (0, _crank.createElement)("h4", null, profile.username), (0, _crank.createElement)("p", null, profile.bio), (loggedInUser === null || loggedInUser === void 0 ? void 0 : loggedInUser.username) !== username && (0, _crank.createElement)(_components.FollowUserButton, {
-            username: profile.username,
-            following: profile.following
-          }))))), (0, _crank.createElement)("div", {
-            class: "container"
-          }, (0, _crank.createElement)("div", {
-            class: "row"
-          }, (0, _crank.createElement)("div", {
-            class: "col-xs-12 col-md-10 offset-md-1"
-          }, (0, _crank.createElement)("div", {
-            class: "articles-toggle"
-          }, (0, _crank.createElement)("ul", {
-            class: "nav nav-pills outline-active"
-          }, (0, _crank.createElement)("li", {
-            class: "nav-item"
-          }, (0, _crank.createElement)("a", {
-            class: (0, _classnames.default)('nav-link', {
-              active: feed === 'my'
-            }),
-            href: "/profile/" + profile.username + "?feed=my"
-          }, "My Articles")), (0, _crank.createElement)("li", {
-            class: "nav-item"
-          }, (0, _crank.createElement)("a", {
-            class: (0, _classnames.default)('nav-link', {
-              active: feed === 'favorited'
-            }),
-            href: "/profile/" + profile.username + "?feed=favorited"
-          }, "Favorited Articles")))), (0, _crank.createElement)(_ProfileFeedContent.ProfileFeedContent, {
-            username: username,
-            feed: feed,
-            limit: limitParam,
-            offset: offsetParam
-          }))))))];
-
-        case 8:
-          return [4
-          /*yield*/
-          , _h.sent()];
-
-        case 9:
-          _h.sent();
-
-          _h.label = 10;
-
-        case 10:
-          return [3
-          /*break*/
-          , 2];
-
-        case 11:
-          return [3
-          /*break*/
-          , 18];
-
-        case 12:
-          e_1_1 = _h.sent();
-          e_1 = {
-            error: e_1_1
-          };
-          return [3
-          /*break*/
-          , 18];
-
-        case 13:
-          _h.trys.push([13,, 16, 17]);
-
-          if (!(_f && !_f.done && (_g = _e.return))) return [3
-          /*break*/
-          , 15];
-          return [4
-          /*yield*/
-          , __await(_g.call(_e))];
-
-        case 14:
-          _h.sent();
-
-          _h.label = 15;
-
-        case 15:
-          return [3
-          /*break*/
-          , 17];
-
-        case 16:
-          if (e_1) throw e_1.error;
-          return [7
-          /*endfinally*/
-          ];
-
-        case 17:
-          return [7
-          /*endfinally*/
-          ];
-
-        case 18:
-          return [2
-          /*return*/
-          ];
-      }
-    });
-  });
-}
-},{"@bikeshaving/crank":"k82I","classnames":"qb7c","../../components":"iVTS","../../services/profileService":"eAgI","../../state/pageContextState":"ubNH","./ProfileFeedContent":"WGRC","../../services/eventService":"fkvO","../../services/followService":"tt01","query-string":"FvpG","../../state/userState":"qsQo"}],"z5ec":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ProfileScreen = ProfileScreen;
-
-var _crank = require("@bikeshaving/crank");
-
-var _components = require("../../components");
-
-var _ProfileFeeds = require("./ProfileFeeds");
-
-/** @jsx createElement */
-function ProfileScreen() {
-  return (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)(_components.Navbar, {
-    active: ""
-  }), (0, _crank.createElement)(_ProfileFeeds.ProfileFeeds, null), (0, _crank.createElement)(_components.Footer, null));
-}
-},{"@bikeshaving/crank":"k82I","../../components":"iVTS","./ProfileFeeds":"pGCg"}],"SXbb":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _ProfileScreen = require("./ProfileScreen");
-
-Object.keys(_ProfileScreen).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function () {
-      return _ProfileScreen[key];
-    }
-  });
-});
-},{"./ProfileScreen":"z5ec"}],"zo2T":[function(require,module,exports) {
+},{}],"zo2T":[function(require,module,exports) {
 "use strict";
 
 var _crank = require("@bikeshaving/crank");
-
-require("./styles.scss");
 
 var _page = _interopRequireDefault(require("page"));
 
 var _screens = require("./screens");
 
-var _utils = require("./utils");
+var _profile = require("./screens/profile");
 
 var _viewArticle = require("./screens/view-article");
 
@@ -20414,12 +20412,16 @@ var _userService = require("./services/userService");
 
 var _pageContextState = require("./state/pageContextState");
 
-var _profile = require("./screens/profile");
+require("./styles.scss");
+
+var _utils = require("./utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /** @jsx createElement */
-_page.default.base('/realworld-starter-kit');
+if ("production" === 'production') {
+  _page.default.base('/realworld-starter-kit');
+}
 
 (0, _page.default)('/', function (context) {
   (0, _pageContextState.setPageContext)(context);
@@ -20459,4 +20461,4 @@ try {
   console.log(err);
   (0, _page.default)('/');
 }
-},{"@bikeshaving/crank":"k82I","./styles.scss":"I4sy","page":"bUEv","./screens":"nYHZ","./utils":"s2T4","./screens/view-article":"nVid","./services/userService":"V8SH","./state/pageContextState":"ubNH","./screens/profile":"SXbb"}]},{},["zo2T"], null)
+},{"@bikeshaving/crank":"k82I","page":"bUEv","./screens":"nYHZ","./screens/profile":"SXbb","./screens/view-article":"nVid","./services/userService":"V8SH","./state/pageContextState":"ubNH","./styles.scss":"I4sy","./utils":"s2T4"}]},{},["zo2T"], null)
