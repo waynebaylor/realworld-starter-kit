@@ -4,6 +4,7 @@ import { isLoggedIn, getUser } from '../state/userState';
 import classNames from 'classnames';
 import { NewPostNavLink } from './NewPostNavLink';
 import { UserDetails } from '../types';
+import { linkHref } from '../utils';
 
 interface Props {
   active: 'home' | 'login' | 'register' | 'settings' | '';
@@ -16,13 +17,13 @@ export async function* Navbar(this: Context, { active }: Props) {
     yield (
       <nav class="navbar navbar-light">
         <div class="container">
-          <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href={linkHref('/')}>
             conduit
           </a>
           <ul class="nav navbar-nav pull-xs-right">
             <li class="nav-item">
               {/* <!-- Add "active" class when you're on that page" --> */}
-              <a class={classNames('nav-link', { active: active === 'home' })} href="/">
+              <a class={classNames('nav-link', { active: active === 'home' })} href={linkHref('/')}>
                 Home
               </a>
             </li>
@@ -33,18 +34,18 @@ export async function* Navbar(this: Context, { active }: Props) {
                   <NewPostNavLink />
                 </li>
                 <li class="nav-item">
-                  <a class={classNames('nav-link', { active: active === 'settings' })} href="/settings">
+                  <a class={classNames('nav-link', { active: active === 'settings' })} href={linkHref('/settings')}>
                     <i class="ion-gear-a"></i>&nbsp;Settings
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href={`/profile/${user.username}`}>
+                  <a class="nav-link" href={linkHref(`/profile/${user.username}`)}>
                     <img src={user.image} class="user-pic" />
                     &nbsp;Profile
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/logout">
+                  <a class="nav-link" href={linkHref('/logout')}>
                     Log Out
                   </a>
                 </li>
@@ -54,12 +55,12 @@ export async function* Navbar(this: Context, { active }: Props) {
             {!isLoggedIn() && (
               <Fragment>
                 <li class="nav-item">
-                  <a class={classNames('nav-link', { active: active === 'login' })} href="/login">
+                  <a class={classNames('nav-link', { active: active === 'login' })} href={linkHref('/login')}>
                     Sign in
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class={classNames('nav-link', { active: active === 'register' })} href="/register">
+                  <a class={classNames('nav-link', { active: active === 'register' })} href={linkHref('/register')}>
                     Sign up
                   </a>
                 </li>
