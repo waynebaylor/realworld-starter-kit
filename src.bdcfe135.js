@@ -8580,6 +8580,8 @@ var _eventService = require("../services/eventService");
 
 var _favoriteService = require("../services/favoriteService");
 
+var _utils = require("../utils");
+
 var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
   var _ = {
     label: 0,
@@ -8865,13 +8867,13 @@ function ArticleList(_a) {
             }, (0, _crank.createElement)("div", {
               class: "article-meta"
             }, (0, _crank.createElement)("a", {
-              href: "/profile/" + article.author.username
+              href: (0, _utils.linkHref)("/profile/" + article.author.username)
             }, (0, _crank.createElement)("img", {
               src: article.author.image
             })), (0, _crank.createElement)("div", {
               class: "info"
             }, (0, _crank.createElement)("a", {
-              href: "/profile/" + article.author.username,
+              href: (0, _utils.linkHref)("/profile/" + article.author.username),
               class: "author"
             }, article.author.username), (0, _crank.createElement)("span", {
               class: "date",
@@ -8881,7 +8883,7 @@ function ArticleList(_a) {
               favoritesCount: article.favoritesCount,
               favorited: article.favorited
             })), (0, _crank.createElement)("a", {
-              href: "/article/" + article.slug,
+              href: (0, _utils.linkHref)("/article/" + article.slug),
               class: "preview-link"
             }, (0, _crank.createElement)("h1", null, article.title), (0, _crank.createElement)("p", null, article.description), (0, _crank.createElement)("span", null, "Read more..."), (0, _crank.createElement)("ul", {
               class: "tag-list"
@@ -8961,7 +8963,7 @@ function ArticleList(_a) {
     });
   });
 }
-},{"@bikeshaving/crank":"k82I","../screens/home/FavoriteButton":"MYZF","../services/eventService":"fkvO","../services/favoriteService":"KAtv"}],"v5Vp":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../screens/home/FavoriteButton":"MYZF","../services/eventService":"fkvO","../services/favoriteService":"KAtv","../utils":"s2T4"}],"v5Vp":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9901,6 +9903,8 @@ var _userState = require("../../state/userState");
 
 var _HomeFeedContent = require("./HomeFeedContent");
 
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
@@ -10072,19 +10076,19 @@ function HomeFeeds(_a) {
           class: (0, _classnames.default)('nav-link', {
             active: feed === 'your'
           }),
-          href: "/?feed=your"
+          href: (0, _utils.linkHref)('/?feed=your')
         }, "Your Feed")), (0, _crank.createElement)("li", {
           class: "nav-item"
         }, (0, _crank.createElement)("a", {
           class: (0, _classnames.default)('nav-link', {
             active: !tag && feed === 'global'
           }),
-          href: "/?feed=global"
+          href: (0, _utils.linkHref)('/?feed=global')
         }, "Global Feed")), tag && (0, _crank.createElement)("li", {
           class: "nav-item"
         }, (0, _crank.createElement)("a", {
           class: "nav-link active",
-          href: "/?tag=" + tag,
+          href: (0, _utils.linkHref)("/?tag=" + tag),
           onclick: function onclick(event) {
             return event.preventDefault();
           }
@@ -10133,7 +10137,7 @@ function HomeFeeds(_a) {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","classnames":"qb7c","../../state/pageContextState":"ubNH","../../state/userState":"qsQo","./HomeFeedContent":"MbzM"}],"GW5Q":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","classnames":"qb7c","../../state/pageContextState":"ubNH","../../state/userState":"qsQo","./HomeFeedContent":"MbzM","../../utils":"s2T4"}],"GW5Q":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10334,6 +10338,8 @@ var _components = require("../../components");
 var _pageContextState = require("../../state/pageContextState");
 
 var _classnames = _interopRequireDefault(require("classnames"));
+
+var _utils = require("../../utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10594,7 +10600,7 @@ function Sidebar(_a) {
             class: "tag-list"
           }, (_b = resp.response) === null || _b === void 0 ? void 0 : _b.tags.map(function (t) {
             return (0, _crank.createElement)("a", {
-              href: "/?tag=" + t,
+              href: (0, _utils.linkHref)("/?tag=" + t),
               class: (0, _classnames.default)('tag-pill', 'tag-default', {
                 'tag-primary': t === selectedTag
               })
@@ -10669,7 +10675,7 @@ function Sidebar(_a) {
     });
   });
 }
-},{"@bikeshaving/crank":"k82I","../../services/tagService":"GW5Q","../../components":"iVTS","../../state/pageContextState":"ubNH","classnames":"qb7c"}],"ixE3":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../services/tagService":"GW5Q","../../components":"iVTS","../../state/pageContextState":"ubNH","classnames":"qb7c","../../utils":"s2T4"}],"ixE3":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11028,6 +11034,8 @@ var _page = _interopRequireDefault(require("page"));
 
 var _userState = require("../../state/userState");
 
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
@@ -11254,7 +11262,7 @@ function RegistrationForm() {
         }, "Sign up"), (0, _crank.createElement)("p", {
           class: "text-xs-center"
         }, (0, _crank.createElement)("a", {
-          href: "/login"
+          href: (0, _utils.linkHref)('/login')
         }, "Have an account?")), hasErrors && (0, _crank.createElement)(_components.Errors, {
           errors: response.errors
         }), (0, _crank.createElement)("form", {
@@ -11299,7 +11307,7 @@ function RegistrationForm() {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","../../services/userService":"V8SH","../../components":"iVTS","page":"bUEv","../../state/userState":"qsQo"}],"VuvE":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../services/userService":"V8SH","../../components":"iVTS","page":"bUEv","../../state/userState":"qsQo","../../utils":"s2T4"}],"VuvE":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11354,6 +11362,8 @@ var _components = require("../../components");
 var _userState = require("../../state/userState");
 
 var _page = _interopRequireDefault(require("page"));
+
+var _utils = require("../../utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11580,7 +11590,7 @@ function LoginForm() {
         }, "Sign in"), (0, _crank.createElement)("p", {
           class: "text-xs-center"
         }, (0, _crank.createElement)("a", {
-          href: "/register"
+          href: (0, _utils.linkHref)('/register')
         }, "Need an account?")), hasErrors && (0, _crank.createElement)(_components.Errors, {
           errors: response.errors
         }), (0, _crank.createElement)("form", {
@@ -11618,7 +11628,7 @@ function LoginForm() {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","../../services/userService":"V8SH","../../components":"iVTS","../../state/userState":"qsQo","page":"bUEv"}],"IF1A":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../services/userService":"V8SH","../../components":"iVTS","../../state/userState":"qsQo","page":"bUEv","../../utils":"s2T4"}],"IF1A":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13718,6 +13728,8 @@ var qs = _interopRequireWildcard(require("query-string"));
 
 var _userState = require("../../state/userState");
 
+var _utils = require("../../utils");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -14107,14 +14119,14 @@ function ProfileFeeds(_a) {
             class: (0, _classnames.default)('nav-link', {
               active: feed === 'my'
             }),
-            href: "/profile/" + profile.username + "?feed=my"
+            href: (0, _utils.linkHref)("/profile/" + profile.username + "?feed=my")
           }, "My Articles")), (0, _crank.createElement)("li", {
             class: "nav-item"
           }, (0, _crank.createElement)("a", {
             class: (0, _classnames.default)('nav-link', {
               active: feed === 'favorited'
             }),
-            href: "/profile/" + profile.username + "?feed=favorited"
+            href: (0, _utils.linkHref)("/profile/" + profile.username + "?feed=favorited")
           }, "Favorited Articles")))), (0, _crank.createElement)(_ProfileFeedContent.ProfileFeedContent, {
             username: username,
             feed: feed,
@@ -14190,7 +14202,7 @@ function ProfileFeeds(_a) {
     });
   });
 }
-},{"@bikeshaving/crank":"k82I","classnames":"qb7c","../../components":"iVTS","../../services/profileService":"eAgI","../../state/pageContextState":"ubNH","./ProfileFeedContent":"WGRC","../../services/eventService":"fkvO","../../services/followService":"tt01","query-string":"FvpG","../../state/userState":"qsQo"}],"z5ec":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","classnames":"qb7c","../../components":"iVTS","../../services/profileService":"eAgI","../../state/pageContextState":"ubNH","./ProfileFeedContent":"WGRC","../../services/eventService":"fkvO","../../services/followService":"tt01","query-string":"FvpG","../../state/userState":"qsQo","../../utils":"s2T4"}],"z5ec":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15243,6 +15255,8 @@ var _EditArticleButton = require("./EditArticleButton");
 
 var _DeleteArticleButton = require("./DeleteArticleButton");
 
+var _utils = require("../../utils");
+
 var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
   var _ = {
     label: 0,
@@ -15401,13 +15415,13 @@ function ArticleMeta(_a) {
         , (0, _crank.createElement)("div", {
           class: "article-meta"
         }, (0, _crank.createElement)("a", {
-          href: "/profile/" + article.author.username
+          href: (0, _utils.linkHref)("/profile/" + article.author.username)
         }, (0, _crank.createElement)("img", {
           src: article.author.image
         })), (0, _crank.createElement)("div", {
           class: "info"
         }, (0, _crank.createElement)("a", {
-          href: "/profile/" + article.author.username,
+          href: (0, _utils.linkHref)("/profile/" + article.author.username),
           class: "author"
         }, article.author.username), (0, _crank.createElement)("span", {
           class: "date"
@@ -15467,7 +15481,7 @@ function ArticleMeta(_a) {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","../../components/FollowUserButton":"UV5u","../../state/userState":"qsQo","./FavoritePostButton":"Isjr","./EditArticleButton":"PClj","./DeleteArticleButton":"zFgo"}],"YkrN":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../components/FollowUserButton":"UV5u","../../state/userState":"qsQo","./FavoritePostButton":"Isjr","./EditArticleButton":"PClj","./DeleteArticleButton":"zFgo","../../utils":"s2T4"}],"YkrN":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19161,6 +19175,8 @@ var _crank = require("@bikeshaving/crank");
 
 var _userState = require("../../state/userState");
 
+var _utils = require("../../utils");
+
 var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
   var _ = {
     label: 0,
@@ -19326,13 +19342,13 @@ function Comment(_a) {
         }, comment.body)), (0, _crank.createElement)("div", {
           class: "card-footer"
         }, (0, _crank.createElement)("a", {
-          href: "/profile/" + comment.author.username,
+          href: (0, _utils.linkHref)("/profile/" + comment.author.username),
           class: "comment-author"
         }, (0, _crank.createElement)("img", {
           src: comment.author.image,
           class: "comment-author-img"
         })), "\xA0", (0, _crank.createElement)("a", {
-          href: "/profile/" + comment.author.username,
+          href: (0, _utils.linkHref)("/profile/" + comment.author.username),
           class: "comment-author"
         }, comment.author.username), (0, _crank.createElement)("span", {
           class: "date-posted"
@@ -19390,7 +19406,7 @@ function Comment(_a) {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","../../state/userState":"qsQo"}],"curH":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../state/userState":"qsQo","../../utils":"s2T4"}],"curH":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19409,6 +19425,8 @@ var _userState = require("../../state/userState");
 var _CommentForm = require("./CommentForm");
 
 var _Comment = require("./Comment");
+
+var _utils = require("../../utils");
 
 var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
   var _ = {
@@ -19686,9 +19704,9 @@ function CommentSection(_a) {
             article: article,
             handleNewComment: addComment
           }), !(0, _userState.isLoggedIn)() && (0, _crank.createElement)("p", null, (0, _crank.createElement)("a", {
-            href: "/login"
+            href: (0, _utils.linkHref)('/login')
           }, "Sign in"), " or ", (0, _crank.createElement)("a", {
-            href: "/register"
+            href: (0, _utils.linkHref)('/register')
           }, "sign up"), " to add comments to this article."), comments.map(function (c) {
             return (0, _crank.createElement)(_Comment.Comment, {
               "crank-key": c.id,
@@ -19767,7 +19785,7 @@ function CommentSection(_a) {
     });
   });
 }
-},{"@bikeshaving/crank":"k82I","../../components":"iVTS","../../services/commentService":"NpXW","../../state/userState":"qsQo","./CommentForm":"mmSo","./Comment":"Fgin"}],"EToo":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../components":"iVTS","../../services/commentService":"NpXW","../../state/userState":"qsQo","./CommentForm":"mmSo","./Comment":"Fgin","../../utils":"s2T4"}],"EToo":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
