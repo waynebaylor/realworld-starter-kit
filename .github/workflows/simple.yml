@@ -28,14 +28,16 @@ jobs:
         with:
           node-version: '12.x'
 
-      # Install
-      - run: |
-        npm install
-        npm run build-prod
-      - run: |
-        git checkout gh-pages
-        rm index.html src*
-        mv dist/* .
-        git add .
-        git commit -m "updating from latest"
-        git push origin gh-pages
+      - name: build
+        run: |
+          npm install
+          npm run build-prod
+
+      - name: update gh-pages
+        run: |
+          git checkout gh-pages
+          rm index.html src*
+          mv dist/* .
+          git add .
+          git commit -m "updating from latest"
+          git push origin gh-pages
