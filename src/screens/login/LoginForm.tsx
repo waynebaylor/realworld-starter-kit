@@ -5,6 +5,7 @@ import { Errors } from '../../components';
 import { setUser } from '../../state/userState';
 import page from 'page';
 import { ErrorResp } from '../../services';
+import { linkHref } from '../../utils';
 
 export function* LoginForm(this: Context) {
   let loading = false;
@@ -45,7 +46,7 @@ export function* LoginForm(this: Context) {
             <div class="col-md-6 offset-md-3 col-xs-12">
               <h1 class="text-xs-center">Sign in</h1>
               <p class="text-xs-center">
-                <a href="/register">Need an account?</a>
+                <a href={linkHref('/register')}>Need an account?</a>
               </p>
 
               {hasErrors && <Errors errors={response.errors} />}

@@ -4,6 +4,7 @@ import { popularTags } from '../../services/tagService';
 import { LoadingIndicator } from '../../components';
 import { getQueryParams, watchPageContext } from '../../state/pageContextState';
 import classNames from 'classnames';
+import { linkHref } from '../../utils';
 
 export async function* Sidebar(this: Context, {}) {
   let selectedTag = getQueryParams().tag;
@@ -34,7 +35,7 @@ export async function* Sidebar(this: Context, {}) {
         <p>Popular Tags</p>
         <div class="tag-list">
           {resp.response?.tags.map((t) => (
-            <a href={`/?tag=${t}`} class={classNames('tag-pill', 'tag-default', { 'tag-primary': t === selectedTag })}>
+            <a href={linkHref(`/?tag=${t}`)} class={classNames('tag-pill', 'tag-default', { 'tag-primary': t === selectedTag })}>
               {t}
             </a>
           ))}

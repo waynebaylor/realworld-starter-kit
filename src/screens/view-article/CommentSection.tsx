@@ -6,6 +6,7 @@ import { getComments, deleteComment } from '../../services/commentService';
 import { isLoggedIn } from '../../state/userState';
 import { CommentForm } from './CommentForm';
 import { Comment } from './Comment';
+import { linkHref } from '../../utils';
 
 export async function* CommentSection(this: Context, { article }: { article: ArticleDetails }) {
   yield (
@@ -45,7 +46,7 @@ export async function* CommentSection(this: Context, { article }: { article: Art
 
         {!isLoggedIn() && (
           <p>
-            <a href="/login">Sign in</a> or <a href="/register">sign up</a> to add comments to this article.
+            <a href={linkHref('/login')}>Sign in</a> or <a href={linkHref('/register')}>sign up</a> to add comments to this article.
           </p>
         )}
 

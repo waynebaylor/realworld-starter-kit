@@ -4,6 +4,7 @@ import { FavoriteButton } from '../screens/home/FavoriteButton';
 import { ArticleDetails } from '../types';
 import { favoritePostListener, unfavoritePostListener } from '../services/eventService';
 import { favoritePost, unfavoritePost } from '../services/favoriteService';
+import { linkHref } from '../utils';
 
 export async function* ArticleList(this: Context, { articles: articlesProp }: { articles: ArticleDetails[] }) {
   let articles = articlesProp;
@@ -36,11 +37,11 @@ export async function* ArticleList(this: Context, { articles: articlesProp }: { 
     yield articles.map((article) => (
       <div class="article-preview" crank-key={article.slug}>
         <div class="article-meta">
-          <a href={`/profile/${article.author.username}`}>
+          <a href={linkHref(`/profile/${article.author.username}`)}>
             <img src={article.author.image} />
           </a>
           <div class="info">
-            <a href={`/profile/${article.author.username}`} class="author">
+            <a href={linkHref(`/profile/${article.author.username}`)} class="author">
               {article.author.username}
             </a>
             <span class="date" title={article.createdAt}>
@@ -49,7 +50,7 @@ export async function* ArticleList(this: Context, { articles: articlesProp }: { 
           </div>
           <FavoriteButton slug={article.slug} favoritesCount={article.favoritesCount} favorited={article.favorited} />
         </div>
-        <a href={`/article/${article.slug}`} class="preview-link">
+        <a href={linkHref(`/article/${article.slug}`)} class="preview-link">
           <h1>{article.title}</h1>
           <p>{article.description}</p>
           <span>Read more...</span>

@@ -2,6 +2,7 @@
 import { createElement, Context, Fragment } from '@bikeshaving/crank';
 import { CommentDetails, UserDetails } from '../../types';
 import { isLoggedIn, getUser } from '../../state/userState';
+import { linkHref } from '../../utils';
 
 export function* Comment(this: Context, { comment, handleDelete }: { comment: CommentDetails; handleDelete(event: Event): void }) {
   const user = getUser() as UserDetails;
@@ -13,11 +14,11 @@ export function* Comment(this: Context, { comment, handleDelete }: { comment: Co
           <p class="card-text">{comment.body}</p>
         </div>
         <div class="card-footer">
-          <a href={`/profile/${comment.author.username}`} class="comment-author">
+          <a href={linkHref(`/profile/${comment.author.username}`)} class="comment-author">
             <img src={comment.author.image} class="comment-author-img" />
           </a>
           &nbsp;
-          <a href={`/profile/${comment.author.username}`} class="comment-author">
+          <a href={linkHref(`/profile/${comment.author.username}`)} class="comment-author">
             {comment.author.username}
           </a>
           <span class="date-posted">{new Date(comment.createdAt).toDateString()}</span>

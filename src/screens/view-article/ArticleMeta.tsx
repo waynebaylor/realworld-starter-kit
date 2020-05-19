@@ -6,6 +6,7 @@ import { ArticleDetails } from '../../types';
 import { FavoritePostButton } from './FavoritePostButton';
 import { EditArticleButton } from './EditArticleButton';
 import { DeleteArticleButton } from './DeleteArticleButton';
+import { linkHref } from '../../utils';
 
 export function* ArticleMeta(this: Context, { article }: { article: ArticleDetails }) {
   const user = getUser();
@@ -13,11 +14,11 @@ export function* ArticleMeta(this: Context, { article }: { article: ArticleDetai
   for ({ article } of this) {
     yield (
       <div class="article-meta">
-        <a href={`/profile/${article.author.username}`}>
+        <a href={linkHref(`/profile/${article.author.username}`)}>
           <img src={article.author.image} />
         </a>
         <div class="info">
-          <a href={`/profile/${article.author.username}`} class="author">
+          <a href={linkHref(`/profile/${article.author.username}`)} class="author">
             {article.author.username}
           </a>
           <span class="date">{new Date(article.createdAt).toDateString()}</span>

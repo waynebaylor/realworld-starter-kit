@@ -10,6 +10,7 @@ import { followUser, unfollowUser } from '../../services/followService';
 import { ProfileDetails } from '../../types';
 import * as qs from 'query-string';
 import { getUser } from '../../state/userState';
+import { linkHref } from '../../utils';
 
 const getUsername = () => (getPageContext() as PageJS.Context).params.username as string;
 
@@ -109,12 +110,12 @@ export async function* ProfileFeeds(this: Context, {}) {
               <div class="articles-toggle">
                 <ul class="nav nav-pills outline-active">
                   <li class="nav-item">
-                    <a class={classNames('nav-link', { active: feed === 'my' })} href={`/profile/${profile.username}?feed=my`}>
+                    <a class={classNames('nav-link', { active: feed === 'my' })} href={linkHref(`/profile/${profile.username}?feed=my`)}>
                       My Articles
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class={classNames('nav-link', { active: feed === 'favorited' })} href={`/profile/${profile.username}?feed=favorited`}>
+                    <a class={classNames('nav-link', { active: feed === 'favorited' })} href={linkHref(`/profile/${profile.username}?feed=favorited`)}>
                       Favorited Articles
                     </a>
                   </li>

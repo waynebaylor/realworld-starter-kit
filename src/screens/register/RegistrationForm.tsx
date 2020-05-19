@@ -5,6 +5,7 @@ import { Errors } from '../../components';
 import page from 'page';
 import { setUser } from '../../state/userState';
 import { ErrorResp } from '../../services';
+import { linkHref } from '../../utils';
 
 export function* RegistrationForm(this: Context) {
   let loading = false;
@@ -46,7 +47,7 @@ export function* RegistrationForm(this: Context) {
             <div class="col-md-6 offset-md-3 col-xs-12">
               <h1 class="text-xs-center">Sign up</h1>
               <p class="text-xs-center">
-                <a href="/login">Have an account?</a>
+                <a href={linkHref('/login')}>Have an account?</a>
               </p>
 
               {hasErrors && <Errors errors={response.errors} />}
