@@ -1,11 +1,11 @@
-from node:12
+FROM node:12
 
-workdir /app
+WORKDIR /app
 
-copy package.json .
-copy tsconfig.json .
+COPY package.json .
+COPY tsconfig.json .
 
-run npm install
+RUN npm install
 
-copy . .
+COPY . .
 

@@ -15,4 +15,4 @@ services:
       - type: bind
         source: .
         target: /app
-    command: npm run build-prod
+    command: npm run start
