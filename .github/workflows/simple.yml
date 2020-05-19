@@ -35,6 +35,8 @@ jobs:
 
       - name: update gh-pages
         run: |
+          git config --global user.email "wayne.baylor@gmail.com"
+          git config --global user.name "Wade Taylor"
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
           git checkout gh-pages
           rm index.html src*
