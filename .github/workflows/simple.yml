@@ -42,5 +42,5 @@ jobs:
           rm index.html src*
           mv dist/* .
           git add .
-          git commit -m "updating from latest"
+          git diff-index --quiet HEAD || git commit -m "auto-updating from latest on master"
           git push origin gh-pages
