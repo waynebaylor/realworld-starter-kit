@@ -5,7 +5,7 @@ import { deleteArticle, getArticle } from '../../services/articleService';
 import { deleteArticleListener, favoritePostListener, followUserListener, unfavoritePostListener, unfollowUserListener } from '../../services/eventService';
 import { favoritePost, unfavoritePost } from '../../services/favoriteService';
 import { followUser, unfollowUser } from '../../services/followService';
-import { isLoggedIn } from '../../state/userState';
+import { isLoggedIn } from '../../services/userService';
 import { ArticleActions } from './ArticleActions';
 import { ArticleBanner } from './ArticleBanner';
 import { ArticleContent } from './ArticleContent';

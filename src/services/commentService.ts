@@ -1,6 +1,7 @@
-import { ServiceResp, ErrorResp } from '.';
-import { getUser, isLoggedIn } from '../state/userState';
+import { ErrorResp, ServiceResp } from '.';
+import { getUser } from '../state/userState';
 import { CommentDetails, UserDetails } from '../types';
+import { isLoggedIn } from './userService';
 
 /**
  * get comments for an article

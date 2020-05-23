@@ -1,12 +1,12 @@
 /** @jsx createElement */
-import { createElement, Context, Fragment } from '@bikeshaving/crank';
-import { ArticleDetails, CommentDetails } from '../../types';
+import { Context, createElement, Fragment } from '@bikeshaving/crank';
 import { LoadingIndicator } from '../../components';
-import { getComments, deleteComment } from '../../services/commentService';
-import { isLoggedIn } from '../../state/userState';
-import { CommentForm } from './CommentForm';
-import { Comment } from './Comment';
+import { deleteComment, getComments } from '../../services/commentService';
+import { isLoggedIn } from '../../services/userService';
+import { ArticleDetails, CommentDetails } from '../../types';
 import { linkHref } from '../../utils';
+import { Comment } from './Comment';
+import { CommentForm } from './CommentForm';
 
 export async function* CommentSection(this: Context, { article }: { article: ArticleDetails }) {
   yield (

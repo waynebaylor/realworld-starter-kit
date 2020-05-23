@@ -1,10 +1,7 @@
-/**
- * get a user profile
- */
-
 import { ServiceResp } from '.';
+import { getUser } from '../state/userState';
 import { ProfileDetails, UserDetails } from '../types';
-import { isLoggedIn, getUser } from '../state/userState';
+import { isLoggedIn } from './userService';
 
 export interface SingleProfileResp {
   profile: ProfileDetails;
@@ -15,6 +12,10 @@ export interface GetProfileReq {
 }
 
 export type GetProfileResp = ServiceResp<SingleProfileResp>;
+
+/**
+ * get a user profile
+ */
 
 export const getProfile = async ({ username }: GetProfileReq): Promise<GetProfileResp> => {
   let headers = {};

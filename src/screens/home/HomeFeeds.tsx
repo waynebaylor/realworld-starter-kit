@@ -1,10 +1,10 @@
 /** @jsx createElement */
 import { Context, createElement, Fragment } from '@bikeshaving/crank';
 import classNames from 'classnames';
+import { isLoggedIn } from '../../services/userService';
 import { getQueryParams, watchPageContext } from '../../state/pageContextState';
-import { isLoggedIn } from '../../state/userState';
-import { HomeFeedContent } from './HomeFeedContent';
 import { linkHref } from '../../utils';
+import { HomeFeedContent } from './HomeFeedContent';
 
 export function* HomeFeeds(this: Context, {}) {
   let { feed = 'global', tag = '' } = getQueryParams();

@@ -1,6 +1,7 @@
 import * as qs from 'query-string';
-import { getUser, isLoggedIn } from '../state/userState';
+import { getUser } from '../state/userState';
 import { ArticleDetails, UserDetails } from '../types';
+import { isLoggedIn } from './userService';
 
 export interface ArticlesReq {
   limit: number;

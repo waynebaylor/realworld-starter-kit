@@ -1,7 +1,8 @@
 /** @jsx createElement */
-import { createElement, Context, Fragment } from '@bikeshaving/crank';
+import { Context, createElement } from '@bikeshaving/crank';
+import { isLoggedIn } from '../../services/userService';
+import { getUser } from '../../state/userState';
 import { CommentDetails, UserDetails } from '../../types';
-import { isLoggedIn, getUser } from '../../state/userState';
 import { linkHref } from '../../utils';
 
 export function* Comment(this: Context, { comment, handleDelete }: { comment: CommentDetails; handleDelete(event: Event): void }) {

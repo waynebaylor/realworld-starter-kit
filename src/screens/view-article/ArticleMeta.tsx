@@ -1,12 +1,13 @@
 /** @jsx createElement */
 import { Context, createElement, Fragment } from '@bikeshaving/crank';
 import { FollowUserButton } from '../../components/FollowUserButton';
-import { isLoggedIn, getUser } from '../../state/userState';
+import { isLoggedIn } from '../../services/userService';
+import { getUser } from '../../state/userState';
 import { ArticleDetails } from '../../types';
-import { FavoritePostButton } from './FavoritePostButton';
-import { EditArticleButton } from './EditArticleButton';
-import { DeleteArticleButton } from './DeleteArticleButton';
 import { linkHref } from '../../utils';
+import { DeleteArticleButton } from './DeleteArticleButton';
+import { EditArticleButton } from './EditArticleButton';
+import { FavoritePostButton } from './FavoritePostButton';
 
 export function* ArticleMeta(this: Context, { article }: { article: ArticleDetails }) {
   const user = getUser();

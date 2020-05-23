@@ -1,10 +1,11 @@
 /** @jsx createElement */
-import { createElement, Context, Fragment } from '@bikeshaving/crank';
-import { isLoggedIn, getUser } from '../state/userState';
+import { Context, createElement, Fragment } from '@bikeshaving/crank';
 import classNames from 'classnames';
-import { NewPostNavLink } from './NewPostNavLink';
+import { isLoggedIn } from '../services/userService';
+import { getUser } from '../state/userState';
 import { UserDetails } from '../types';
 import { linkHref } from '../utils';
+import { NewPostNavLink } from './NewPostNavLink';
 
 interface Props {
   active: 'home' | 'login' | 'register' | 'settings' | '';

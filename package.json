@@ -17,6 +17,8 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "start": "parcel src/index.html --hmr-port 1235",
+    "test": "jest",
+    "test-watch": "jest --watch",
     "build-prod": "npm run clean && parcel build --no-minify --no-source-maps --public-url=https://waynebaylor.github.io/realworld-starter-kit/ src/index.html"
   },
   "dependencies": {
@@ -28,12 +30,18 @@
     "query-string": "6.12.1"
   },
   "devDependencies": {
+    "@babel/core": "7.9.6",
+    "@babel/preset-env": "7.9.6",
     "@types/classnames": "2.2.10",
+    "@types/jest": "25.2.3",
     "@types/node": "14.0.1",
     "@types/page": "1.8.0",
+    "babel-jest": "26.0.1",
+    "jest": "26.0.1",
     "parcel-bundler": "1.12.4",
     "prettier": "2.0.4",
     "sass": "1.26.3",
+    "ts-jest": "26.0.0",
     "typescript": "3.8.3"
   }
 }

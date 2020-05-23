@@ -26,8 +26,6 @@ export const getUser = () => {
   return user;
 };
 
-export const isLoggedIn = () => getUser() !== null;
-
 export const setUser = (u: UserDetails | null) => {
   set((state) => {
     state.user = u;

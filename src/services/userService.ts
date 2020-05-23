@@ -70,6 +70,11 @@ export const logout = () => {
 };
 
 /**
+ * check if a user is logged in
+ */
+export const isLoggedIn = () => getUser() !== null;
+
+/**
  * update a user's settings
  */
 
