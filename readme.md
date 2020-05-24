@@ -12,6 +12,16 @@ For more information on how to this works with other frontends/backends, head ov
 
 [Crank.js](https://crank.js.org/) implementation of the RealWorld Frontend.
 
+Supporting Libraries:
+
+| Library    | Use                     |
+| ---------- | ----------------------- |
+| Typescript | Typing                  |
+| Parcel     | Build tool              |
+| PageJS     | Routing                 |
+| Immer      | Global state management |
+| Jest       | Testing                 |
+
 # Getting started
 
 Start a local dev server:
