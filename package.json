@@ -32,6 +32,8 @@
   "devDependencies": {
     "@babel/core": "7.9.6",
     "@babel/preset-env": "7.9.6",
+    "@testing-library/dom": "7.5.7",
+    "@testing-library/jest-dom": "5.8.0",
     "@types/classnames": "2.2.10",
     "@types/jest": "25.2.3",
     "@types/node": "14.0.1",
