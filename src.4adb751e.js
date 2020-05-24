@@ -5107,46 +5107,7 @@ function FollowUserButton(_a) {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","../services/eventService":"fkvO"}],"OLp4":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Footer = Footer;
-
-var _crank = require("@bikeshaving/crank");
-
-/** @jsx createElement */
-function Footer() {
-  return (0, _crank.createElement)("footer", null, (0, _crank.createElement)("div", {
-    class: "container"
-  }, (0, _crank.createElement)("a", {
-    href: "/",
-    class: "logo-font"
-  }, "conduit"), (0, _crank.createElement)("span", {
-    class: "attribution"
-  }, "An interactive learning project from ", (0, _crank.createElement)("a", {
-    href: "https://thinkster.io"
-  }, "Thinkster"), ". Code & design licensed under MIT.")));
-}
-},{"@bikeshaving/crank":"k82I"}],"BZOY":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.LoadingIndicator = LoadingIndicator;
-
-var _crank = require("@bikeshaving/crank");
-
-/** @jsx createElement */
-function LoadingIndicator() {
-  return (0, _crank.createElement)("div", {
-    className: "spinner-border"
-  });
-}
-},{"@bikeshaving/crank":"k82I"}],"zWBN":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../services/eventService":"fkvO"}],"zWBN":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6672,68 +6633,48 @@ Object.keys(_linkHref).forEach(function (key) {
     }
   });
 });
-},{"./render":"TnIE","./createState":"lm5O","./linkHref":"Rf8a"}],"qsQo":[function(require,module,exports) {
+},{"./render":"TnIE","./createState":"lm5O","./linkHref":"Rf8a"}],"OLp4":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setUser = exports.isLoggedIn = exports.getUser = exports.unwatchUser = exports.watchUser = void 0;
+exports.Footer = Footer;
+
+var _crank = require("@bikeshaving/crank");
 
 var _utils = require("../utils");
 
-var initialState = {
-  user: null
-};
+/** @jsx createElement */
+function Footer() {
+  return (0, _crank.createElement)("footer", null, (0, _crank.createElement)("div", {
+    class: "container"
+  }, (0, _crank.createElement)("a", {
+    href: (0, _utils.linkHref)('/'),
+    class: "logo-font"
+  }, "conduit"), (0, _crank.createElement)("span", {
+    class: "attribution"
+  }, "An interactive learning project from ", (0, _crank.createElement)("a", {
+    href: "https://thinkster.io"
+  }, "Thinkster"), ". Code & design licensed under MIT.")));
+}
+},{"@bikeshaving/crank":"k82I","../utils":"s2T4"}],"BZOY":[function(require,module,exports) {
+"use strict";
 
-var _a = (0, _utils.createState)(initialState),
-    watch = _a.watch,
-    unwatch = _a.unwatch,
-    get = _a.get,
-    set = _a.set;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LoadingIndicator = LoadingIndicator;
 
-var watchUser = watch;
-exports.watchUser = watchUser;
-var unwatchUser = unwatch;
-exports.unwatchUser = unwatchUser;
+var _crank = require("@bikeshaving/crank");
 
-var getUser = function getUser() {
-  var user = get().user; // check localStorage
-
-  if (user == null) {
-    var value = localStorage.getItem('user');
-
-    if (value) {
-      user = JSON.parse(value);
-      setUser(user);
-    }
-  }
-
-  return user;
-};
-
-exports.getUser = getUser;
-
-var isLoggedIn = function isLoggedIn() {
-  return getUser() !== null;
-};
-
-exports.isLoggedIn = isLoggedIn;
-
-var setUser = function setUser(u) {
-  set(function (state) {
-    state.user = u; // update localStorage
-
-    if (u == null) {
-      localStorage.removeItem('user');
-    } else {
-      localStorage.setItem('user', JSON.stringify(u));
-    }
+/** @jsx createElement */
+function LoadingIndicator() {
+  return (0, _crank.createElement)("div", {
+    className: "spinner-border"
   });
-};
-
-exports.setUser = setUser;
-},{"../utils":"s2T4"}],"qb7c":[function(require,module,exports) {
+}
+},{"@bikeshaving/crank":"k82I"}],"qb7c":[function(require,module,exports) {
 var define;
 /*!
   Copyright (c) 2017 Jed Watson.
@@ -6788,7 +6729,361 @@ var define;
 	}
 }());
 
-},{}],"oXgt":[function(require,module,exports) {
+},{}],"qsQo":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setUser = exports.getUser = exports.unwatchUser = exports.watchUser = void 0;
+
+var _utils = require("../utils");
+
+var initialState = {
+  user: null
+};
+
+var _a = (0, _utils.createState)(initialState),
+    watch = _a.watch,
+    unwatch = _a.unwatch,
+    get = _a.get,
+    set = _a.set;
+
+var watchUser = watch;
+exports.watchUser = watchUser;
+var unwatchUser = unwatch;
+exports.unwatchUser = unwatchUser;
+
+var getUser = function getUser() {
+  var user = get().user; // check localStorage
+
+  if (user == null) {
+    var value = localStorage.getItem('user');
+
+    if (value) {
+      user = JSON.parse(value);
+      setUser(user);
+    }
+  }
+
+  return user;
+};
+
+exports.getUser = getUser;
+
+var setUser = function setUser(u) {
+  set(function (state) {
+    state.user = u; // update localStorage
+
+    if (u == null) {
+      localStorage.removeItem('user');
+    } else {
+      localStorage.setItem('user', JSON.stringify(u));
+    }
+  });
+};
+
+exports.setUser = setUser;
+},{"../utils":"s2T4"}],"V8SH":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.updateSettings = exports.isLoggedIn = exports.logout = exports.login = exports.register = void 0;
+
+var _userState = require("../state/userState");
+
+var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var register = function register(info) {
+  return __awaiter(void 0, void 0, Promise, function () {
+    var resp, respObj;
+    return __generator(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          return [4
+          /*yield*/
+          , fetch('https://conduit.productionready.io/api/users', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              user: info
+            })
+          })];
+
+        case 1:
+          resp = _a.sent();
+          return [4
+          /*yield*/
+          , resp.json()];
+
+        case 2:
+          respObj = _a.sent();
+          return [2
+          /*return*/
+          , {
+            hasErrors: resp.status !== 200,
+            response: respObj
+          }];
+      }
+    });
+  });
+};
+
+exports.register = register;
+
+var login = function login(info) {
+  return __awaiter(void 0, void 0, Promise, function () {
+    var resp, respObj;
+    return __generator(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          return [4
+          /*yield*/
+          , fetch('https://conduit.productionready.io/api/users/login', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              user: info
+            })
+          })];
+
+        case 1:
+          resp = _a.sent();
+          return [4
+          /*yield*/
+          , resp.json()];
+
+        case 2:
+          respObj = _a.sent();
+          return [2
+          /*return*/
+          , {
+            hasErrors: resp.status !== 200,
+            response: respObj
+          }];
+      }
+    });
+  });
+};
+/**
+ * logout a user
+ */
+
+
+exports.login = login;
+
+var logout = function logout() {
+  (0, _userState.setUser)(null);
+};
+/**
+ * check if a user is logged in
+ */
+
+
+exports.logout = logout;
+
+var isLoggedIn = function isLoggedIn() {
+  return (0, _userState.getUser)() !== null;
+};
+
+exports.isLoggedIn = isLoggedIn;
+
+var updateSettings = function updateSettings(info) {
+  return __awaiter(void 0, void 0, Promise, function () {
+    var user, resp, respObj;
+    return __generator(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          user = (0, _userState.getUser)();
+
+          if (!info.password) {
+            delete info['password'];
+          }
+
+          return [4
+          /*yield*/
+          , fetch('https://conduit.productionready.io/api/user', {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: "Token " + user.token
+            },
+            body: JSON.stringify({
+              user: info
+            })
+          })];
+
+        case 1:
+          resp = _a.sent();
+          return [4
+          /*yield*/
+          , resp.json()];
+
+        case 2:
+          respObj = _a.sent();
+          return [2
+          /*return*/
+          , {
+            hasErrors: resp.status !== 200,
+            response: respObj
+          }];
+      }
+    });
+  });
+};
+
+exports.updateSettings = updateSettings;
+},{"../state/userState":"qsQo"}],"oXgt":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7103,13 +7398,15 @@ exports.Navbar = Navbar;
 
 var _crank = require("@bikeshaving/crank");
 
-var _userState = require("../state/userState");
-
 var _classnames = _interopRequireDefault(require("classnames"));
 
-var _NewPostNavLink = require("./NewPostNavLink");
+var _userService = require("../services/userService");
+
+var _userState = require("../state/userState");
 
 var _utils = require("../utils");
+
+var _NewPostNavLink = require("./NewPostNavLink");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7345,7 +7642,7 @@ function Navbar(_a) {
               active: active === 'home'
             }),
             href: (0, _utils.linkHref)('/')
-          }, "Home")), (0, _userState.isLoggedIn)() && (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)("li", {
+          }, "Home")), (0, _userService.isLoggedIn)() && (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)("li", {
             class: "nav-item"
           }, (0, _crank.createElement)(_NewPostNavLink.NewPostNavLink, null)), (0, _crank.createElement)("li", {
             class: "nav-item"
@@ -7369,7 +7666,7 @@ function Navbar(_a) {
           }, (0, _crank.createElement)("a", {
             class: "nav-link",
             href: (0, _utils.linkHref)('/logout')
-          }, "Log Out"))), !(0, _userState.isLoggedIn)() && (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)("li", {
+          }, "Log Out"))), !(0, _userService.isLoggedIn)() && (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)("li", {
             class: "nav-item"
           }, (0, _crank.createElement)("a", {
             class: (0, _classnames.default)('nav-link', {
@@ -7453,7 +7750,7 @@ function Navbar(_a) {
     });
   });
 }
-},{"@bikeshaving/crank":"k82I","../state/userState":"qsQo","classnames":"qb7c","./NewPostNavLink":"oXgt","../utils":"s2T4"}],"iVTS":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","classnames":"qb7c","../services/userService":"V8SH","../state/userState":"qsQo","../utils":"s2T4","./NewPostNavLink":"oXgt"}],"iVTS":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9244,6 +9541,8 @@ var qs = _interopRequireWildcard(require("query-string"));
 
 var _userState = require("../state/userState");
 
+var _userService = require("./userService");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -9407,7 +9706,7 @@ var getFeedArticles = function getFeedArticles(req, yourFeed) {
         case 0:
           headers = {};
 
-          if ((0, _userState.isLoggedIn)()) {
+          if ((0, _userService.isLoggedIn)()) {
             user = (0, _userState.getUser)();
             headers = {
               Authorization: "Token " + user.token
@@ -9443,7 +9742,7 @@ var getFeedArticles = function getFeedArticles(req, yourFeed) {
 };
 
 exports.getFeedArticles = getFeedArticles;
-},{"query-string":"FvpG","../state/userState":"qsQo"}],"MbzM":[function(require,module,exports) {
+},{"query-string":"FvpG","../state/userState":"qsQo","./userService":"V8SH"}],"MbzM":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9897,13 +10196,13 @@ var _crank = require("@bikeshaving/crank");
 
 var _classnames = _interopRequireDefault(require("classnames"));
 
+var _userService = require("../../services/userService");
+
 var _pageContextState = require("../../state/pageContextState");
 
-var _userState = require("../../state/userState");
+var _utils = require("../../utils");
 
 var _HomeFeedContent = require("./HomeFeedContent");
-
-var _utils = require("../../utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10070,7 +10369,7 @@ function HomeFeeds(_a) {
           class: "feed-toggle"
         }, (0, _crank.createElement)("ul", {
           class: "nav nav-pills outline-active"
-        }, (0, _userState.isLoggedIn)() && (0, _crank.createElement)("li", {
+        }, (0, _userService.isLoggedIn)() && (0, _crank.createElement)("li", {
           class: "nav-item"
         }, (0, _crank.createElement)("a", {
           class: (0, _classnames.default)('nav-link', {
@@ -10137,7 +10436,7 @@ function HomeFeeds(_a) {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","classnames":"qb7c","../../state/pageContextState":"ubNH","../../state/userState":"qsQo","./HomeFeedContent":"MbzM","../../utils":"s2T4"}],"GW5Q":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","classnames":"qb7c","../../services/userService":"V8SH","../../state/pageContextState":"ubNH","../../utils":"s2T4","./HomeFeedContent":"MbzM"}],"GW5Q":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10727,296 +11026,7 @@ Object.keys(_HomeScreen).forEach(function (key) {
     }
   });
 });
-},{"./HomeScreen":"ixE3"}],"V8SH":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.updateSettings = exports.logout = exports.login = exports.register = void 0;
-
-var _userState = require("../state/userState");
-
-var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var register = function register(info) {
-  return __awaiter(void 0, void 0, Promise, function () {
-    var resp, respObj;
-    return __generator(this, function (_a) {
-      switch (_a.label) {
-        case 0:
-          return [4
-          /*yield*/
-          , fetch('https://conduit.productionready.io/api/users', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              user: info
-            })
-          })];
-
-        case 1:
-          resp = _a.sent();
-          return [4
-          /*yield*/
-          , resp.json()];
-
-        case 2:
-          respObj = _a.sent();
-          return [2
-          /*return*/
-          , {
-            hasErrors: resp.status !== 200,
-            response: respObj
-          }];
-      }
-    });
-  });
-};
-
-exports.register = register;
-
-var login = function login(info) {
-  return __awaiter(void 0, void 0, Promise, function () {
-    var resp, respObj;
-    return __generator(this, function (_a) {
-      switch (_a.label) {
-        case 0:
-          return [4
-          /*yield*/
-          , fetch('https://conduit.productionready.io/api/users/login', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              user: info
-            })
-          })];
-
-        case 1:
-          resp = _a.sent();
-          return [4
-          /*yield*/
-          , resp.json()];
-
-        case 2:
-          respObj = _a.sent();
-          return [2
-          /*return*/
-          , {
-            hasErrors: resp.status !== 200,
-            response: respObj
-          }];
-      }
-    });
-  });
-};
-/**
- * logout a user
- */
-
-
-exports.login = login;
-
-var logout = function logout() {
-  (0, _userState.setUser)(null);
-};
-
-exports.logout = logout;
-
-var updateSettings = function updateSettings(info) {
-  return __awaiter(void 0, void 0, Promise, function () {
-    var user, resp, respObj;
-    return __generator(this, function (_a) {
-      switch (_a.label) {
-        case 0:
-          user = (0, _userState.getUser)();
-
-          if (!info.password) {
-            delete info['password'];
-          }
-
-          return [4
-          /*yield*/
-          , fetch('https://conduit.productionready.io/api/user', {
-            method: 'PUT',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: "Token " + user.token
-            },
-            body: JSON.stringify({
-              user: info
-            })
-          })];
-
-        case 1:
-          resp = _a.sent();
-          return [4
-          /*yield*/
-          , resp.json()];
-
-        case 2:
-          respObj = _a.sent();
-          return [2
-          /*return*/
-          , {
-            hasErrors: resp.status !== 200,
-            response: respObj
-          }];
-      }
-    });
-  });
-};
-
-exports.updateSettings = updateSettings;
-},{"../state/userState":"qsQo"}],"da6d":[function(require,module,exports) {
+},{"./HomeScreen":"ixE3"}],"da6d":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12013,6 +12023,8 @@ exports.editArticle = exports.deleteArticle = exports.getArticle = exports.publi
 
 var _userState = require("../state/userState");
 
+var _userService = require("./userService");
+
 var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function (resolve) {
@@ -12206,7 +12218,7 @@ var getArticle = function getArticle(req) {
         case 0:
           headers = {};
 
-          if ((0, _userState.isLoggedIn)()) {
+          if ((0, _userService.isLoggedIn)()) {
             user = (0, _userState.getUser)();
             headers = {
               Authorization: "Token " + user.token
@@ -12250,7 +12262,7 @@ var deleteArticle = function deleteArticle(req) {
         case 0:
           headers = {};
 
-          if ((0, _userState.isLoggedIn)()) {
+          if ((0, _userService.isLoggedIn)()) {
             user = (0, _userState.getUser)();
             headers = {
               Authorization: "Token " + user.token
@@ -12329,7 +12341,7 @@ var editArticle = function editArticle(req) {
 };
 
 exports.editArticle = editArticle;
-},{"../state/userState":"qsQo"}],"k4nx":[function(require,module,exports) {
+},{"../state/userState":"qsQo","./userService":"V8SH"}],"k4nx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12869,9 +12881,8 @@ exports.getProfile = void 0;
 
 var _userState = require("../state/userState");
 
-/**
- * get a user profile
- */
+var _userService = require("./userService");
+
 var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function (resolve) {
@@ -13015,6 +13026,9 @@ var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
   }
 };
 
+/**
+ * get a user profile
+ */
 var getProfile = function getProfile(_a) {
   var username = _a.username;
   return __awaiter(void 0, void 0, Promise, function () {
@@ -13024,7 +13038,7 @@ var getProfile = function getProfile(_a) {
         case 0:
           headers = {};
 
-          if ((0, _userState.isLoggedIn)()) {
+          if ((0, _userService.isLoggedIn)()) {
             user = (0, _userState.getUser)();
             headers = {
               Authorization: "Token " + user.token
@@ -13059,7 +13073,7 @@ var getProfile = function getProfile(_a) {
 };
 
 exports.getProfile = getProfile;
-},{"../state/userState":"qsQo"}],"WGRC":[function(require,module,exports) {
+},{"../state/userState":"qsQo","./userService":"V8SH"}],"WGRC":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14240,252 +14254,39 @@ Object.keys(_ProfileScreen).forEach(function (key) {
     }
   });
 });
-},{"./ProfileScreen":"z5ec"}],"Isjr":[function(require,module,exports) {
+},{"./ProfileScreen":"z5ec"}],"zFgo":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FavoritePostButton = FavoritePostButton;
+exports.DeleteArticleButton = DeleteArticleButton;
 
 var _crank = require("@bikeshaving/crank");
 
 var _eventService = require("../../services/eventService");
 
-var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var __values = void 0 && (void 0).__values || function (o) {
-  var s = typeof Symbol === "function" && Symbol.iterator,
-      m = s && o[s],
-      i = 0;
-  if (m) return m.call(o);
-  if (o && typeof o.length === "number") return {
-    next: function next() {
-      if (o && i >= o.length) o = void 0;
-      return {
-        value: o && o[i++],
-        done: !o
-      };
-    }
-  };
-  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
 /** @jsx createElement */
-
-
-function FavoritePostButton(_a) {
-  var handleFavorite, handleUnfavorite, _b, _c, e_1_1;
-
-  var e_1, _d, _e;
-
+function DeleteArticleButton(_a) {
   var _this = this;
 
-  var slug = _a.slug,
-      favorited = _a.favorited,
-      favoritesCount = _a.favoritesCount;
-  return __generator(this, function (_f) {
-    switch (_f.label) {
-      case 0:
-        handleFavorite = function handleFavorite(event) {
-          event.preventDefault();
+  var slug = _a.slug;
 
-          _this.dispatchEvent((0, _eventService.favoritePostEvent)({
-            slug: slug
-          }));
-        };
+  var handleDelete = function handleDelete(event) {
+    event.preventDefault();
 
-        handleUnfavorite = function handleUnfavorite(event) {
-          event.preventDefault();
+    _this.dispatchEvent((0, _eventService.deleteArticleEvent)({
+      slug: slug
+    }));
+  };
 
-          _this.dispatchEvent((0, _eventService.unfavoritePostEvent)({
-            slug: slug
-          }));
-        };
-
-        _f.label = 1;
-
-      case 1:
-        _f.trys.push([1, 6, 7, 8]);
-
-        _b = __values(this), _c = _b.next();
-        _f.label = 2;
-
-      case 2:
-        if (!!_c.done) return [3
-        /*break*/
-        , 5];
-        _e = _c.value, favorited = _e.favorited, favoritesCount = _e.favoritesCount;
-        return [4
-        /*yield*/
-        , (0, _crank.createElement)(_crank.Fragment, null, favorited && (0, _crank.createElement)("button", {
-          type: "button",
-          class: "btn btn-sm btn-primary",
-          onclick: handleUnfavorite
-        }, (0, _crank.createElement)("i", {
-          class: "ion-heart"
-        }), "\xA0 Unfavorite Post ", (0, _crank.createElement)("span", {
-          class: "counter"
-        }, "(", favoritesCount, ")")), !favorited && (0, _crank.createElement)("button", {
-          type: "button",
-          class: "btn btn-sm btn-outline-primary",
-          onclick: handleFavorite
-        }, (0, _crank.createElement)("i", {
-          class: "ion-heart"
-        }), "\xA0 Favorite Post ", (0, _crank.createElement)("span", {
-          class: "counter"
-        }, "(", favoritesCount, ")")))];
-
-      case 3:
-        _f.sent();
-
-        _f.label = 4;
-
-      case 4:
-        _c = _b.next();
-        return [3
-        /*break*/
-        , 2];
-
-      case 5:
-        return [3
-        /*break*/
-        , 8];
-
-      case 6:
-        e_1_1 = _f.sent();
-        e_1 = {
-          error: e_1_1
-        };
-        return [3
-        /*break*/
-        , 8];
-
-      case 7:
-        try {
-          if (_c && !_c.done && (_d = _b.return)) _d.call(_b);
-        } finally {
-          if (e_1) throw e_1.error;
-        }
-
-        return [7
-        /*endfinally*/
-        ];
-
-      case 8:
-        return [2
-        /*return*/
-        ];
-    }
-  });
+  return (0, _crank.createElement)("button", {
+    type: "button",
+    class: "btn btn-sm btn-outline-danger",
+    onclick: handleDelete
+  }, (0, _crank.createElement)("i", {
+    class: "ion-trash-a"
+  }), "\xA0 Delete Article");
 }
 },{"@bikeshaving/crank":"k82I","../../services/eventService":"fkvO"}],"BROZ":[function(require,module,exports) {
 "use strict";
@@ -15201,39 +15002,252 @@ function EditArticleButton(_a) {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","../edit-article":"XeBi","../../services/eventService":"fkvO"}],"zFgo":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../edit-article":"XeBi","../../services/eventService":"fkvO"}],"Isjr":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DeleteArticleButton = DeleteArticleButton;
+exports.FavoritePostButton = FavoritePostButton;
 
 var _crank = require("@bikeshaving/crank");
 
 var _eventService = require("../../services/eventService");
 
+var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var __values = void 0 && (void 0).__values || function (o) {
+  var s = typeof Symbol === "function" && Symbol.iterator,
+      m = s && o[s],
+      i = 0;
+  if (m) return m.call(o);
+  if (o && typeof o.length === "number") return {
+    next: function next() {
+      if (o && i >= o.length) o = void 0;
+      return {
+        value: o && o[i++],
+        done: !o
+      };
+    }
+  };
+  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
 /** @jsx createElement */
-function DeleteArticleButton(_a) {
+
+
+function FavoritePostButton(_a) {
+  var handleFavorite, handleUnfavorite, _b, _c, e_1_1;
+
+  var e_1, _d, _e;
+
   var _this = this;
 
-  var slug = _a.slug;
+  var slug = _a.slug,
+      favorited = _a.favorited,
+      favoritesCount = _a.favoritesCount;
+  return __generator(this, function (_f) {
+    switch (_f.label) {
+      case 0:
+        handleFavorite = function handleFavorite(event) {
+          event.preventDefault();
 
-  var handleDelete = function handleDelete(event) {
-    event.preventDefault();
+          _this.dispatchEvent((0, _eventService.favoritePostEvent)({
+            slug: slug
+          }));
+        };
 
-    _this.dispatchEvent((0, _eventService.deleteArticleEvent)({
-      slug: slug
-    }));
-  };
+        handleUnfavorite = function handleUnfavorite(event) {
+          event.preventDefault();
 
-  return (0, _crank.createElement)("button", {
-    type: "button",
-    class: "btn btn-sm btn-outline-danger",
-    onclick: handleDelete
-  }, (0, _crank.createElement)("i", {
-    class: "ion-trash-a"
-  }), "\xA0 Delete Article");
+          _this.dispatchEvent((0, _eventService.unfavoritePostEvent)({
+            slug: slug
+          }));
+        };
+
+        _f.label = 1;
+
+      case 1:
+        _f.trys.push([1, 6, 7, 8]);
+
+        _b = __values(this), _c = _b.next();
+        _f.label = 2;
+
+      case 2:
+        if (!!_c.done) return [3
+        /*break*/
+        , 5];
+        _e = _c.value, favorited = _e.favorited, favoritesCount = _e.favoritesCount;
+        return [4
+        /*yield*/
+        , (0, _crank.createElement)(_crank.Fragment, null, favorited && (0, _crank.createElement)("button", {
+          type: "button",
+          class: "btn btn-sm btn-primary",
+          onclick: handleUnfavorite
+        }, (0, _crank.createElement)("i", {
+          class: "ion-heart"
+        }), "\xA0 Unfavorite Post ", (0, _crank.createElement)("span", {
+          class: "counter"
+        }, "(", favoritesCount, ")")), !favorited && (0, _crank.createElement)("button", {
+          type: "button",
+          class: "btn btn-sm btn-outline-primary",
+          onclick: handleFavorite
+        }, (0, _crank.createElement)("i", {
+          class: "ion-heart"
+        }), "\xA0 Favorite Post ", (0, _crank.createElement)("span", {
+          class: "counter"
+        }, "(", favoritesCount, ")")))];
+
+      case 3:
+        _f.sent();
+
+        _f.label = 4;
+
+      case 4:
+        _c = _b.next();
+        return [3
+        /*break*/
+        , 2];
+
+      case 5:
+        return [3
+        /*break*/
+        , 8];
+
+      case 6:
+        e_1_1 = _f.sent();
+        e_1 = {
+          error: e_1_1
+        };
+        return [3
+        /*break*/
+        , 8];
+
+      case 7:
+        try {
+          if (_c && !_c.done && (_d = _b.return)) _d.call(_b);
+        } finally {
+          if (e_1) throw e_1.error;
+        }
+
+        return [7
+        /*endfinally*/
+        ];
+
+      case 8:
+        return [2
+        /*return*/
+        ];
+    }
+  });
 }
 },{"@bikeshaving/crank":"k82I","../../services/eventService":"fkvO"}],"S60A":[function(require,module,exports) {
 "use strict";
@@ -15247,15 +15261,17 @@ var _crank = require("@bikeshaving/crank");
 
 var _FollowUserButton = require("../../components/FollowUserButton");
 
+var _userService = require("../../services/userService");
+
 var _userState = require("../../state/userState");
 
-var _FavoritePostButton = require("./FavoritePostButton");
-
-var _EditArticleButton = require("./EditArticleButton");
+var _utils = require("../../utils");
 
 var _DeleteArticleButton = require("./DeleteArticleButton");
 
-var _utils = require("../../utils");
+var _EditArticleButton = require("./EditArticleButton");
+
+var _FavoritePostButton = require("./FavoritePostButton");
 
 var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
   var _ = {
@@ -15425,7 +15441,7 @@ function ArticleMeta(_a) {
           class: "author"
         }, article.author.username), (0, _crank.createElement)("span", {
           class: "date"
-        }, new Date(article.createdAt).toDateString())), (user === null || user === void 0 ? void 0 : user.username) !== article.author.username && (0, _userState.isLoggedIn)() && (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)(_FollowUserButton.FollowUserButton, {
+        }, new Date(article.createdAt).toDateString())), (user === null || user === void 0 ? void 0 : user.username) !== article.author.username && (0, _userService.isLoggedIn)() && (0, _crank.createElement)(_crank.Fragment, null, (0, _crank.createElement)(_FollowUserButton.FollowUserButton, {
           username: article.author.username,
           following: article.author.following
         }), "\xA0", (0, _crank.createElement)(_FavoritePostButton.FavoritePostButton, {
@@ -15481,7 +15497,7 @@ function ArticleMeta(_a) {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","../../components/FollowUserButton":"UV5u","../../state/userState":"qsQo","./FavoritePostButton":"Isjr","./EditArticleButton":"PClj","./DeleteArticleButton":"zFgo","../../utils":"s2T4"}],"YkrN":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../components/FollowUserButton":"UV5u","../../services/userService":"V8SH","../../state/userState":"qsQo","../../utils":"s2T4","./DeleteArticleButton":"zFgo","./EditArticleButton":"PClj","./FavoritePostButton":"Isjr"}],"YkrN":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18578,6 +18594,8 @@ exports.deleteComment = exports.postComment = exports.getComments = void 0;
 
 var _userState = require("../state/userState");
 
+var _userService = require("./userService");
+
 var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function (resolve) {
@@ -18730,7 +18748,7 @@ var getComments = function getComments(req) {
           user = (0, _userState.getUser)();
           headers = {};
 
-          if ((0, _userState.isLoggedIn)()) {
+          if ((0, _userService.isLoggedIn)()) {
             user_1 = (0, _userState.getUser)();
             headers = {
               Authorization: "Token " + user_1.token
@@ -18848,7 +18866,252 @@ var deleteComment = function deleteComment(req) {
 };
 
 exports.deleteComment = deleteComment;
-},{"../state/userState":"qsQo"}],"mmSo":[function(require,module,exports) {
+},{"../state/userState":"qsQo","./userService":"V8SH"}],"Fgin":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Comment = Comment;
+
+var _crank = require("@bikeshaving/crank");
+
+var _userService = require("../../services/userService");
+
+var _userState = require("../../state/userState");
+
+var _utils = require("../../utils");
+
+var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var __values = void 0 && (void 0).__values || function (o) {
+  var s = typeof Symbol === "function" && Symbol.iterator,
+      m = s && o[s],
+      i = 0;
+  if (m) return m.call(o);
+  if (o && typeof o.length === "number") return {
+    next: function next() {
+      if (o && i >= o.length) o = void 0;
+      return {
+        value: o && o[i++],
+        done: !o
+      };
+    }
+  };
+  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+/** @jsx createElement */
+
+
+function Comment(_a) {
+  var user, _b, _c, e_1_1;
+
+  var e_1, _d, _e;
+
+  var comment = _a.comment,
+      handleDelete = _a.handleDelete;
+  return __generator(this, function (_f) {
+    switch (_f.label) {
+      case 0:
+        user = (0, _userState.getUser)();
+        _f.label = 1;
+
+      case 1:
+        _f.trys.push([1, 6, 7, 8]);
+
+        _b = __values(this), _c = _b.next();
+        _f.label = 2;
+
+      case 2:
+        if (!!_c.done) return [3
+        /*break*/
+        , 5];
+        _e = _c.value, comment = _e.comment, handleDelete = _e.handleDelete;
+        return [4
+        /*yield*/
+        , (0, _crank.createElement)("div", {
+          class: "card"
+        }, (0, _crank.createElement)("div", {
+          class: "card-block"
+        }, (0, _crank.createElement)("p", {
+          class: "card-text"
+        }, comment.body)), (0, _crank.createElement)("div", {
+          class: "card-footer"
+        }, (0, _crank.createElement)("a", {
+          href: (0, _utils.linkHref)("/profile/" + comment.author.username),
+          class: "comment-author"
+        }, (0, _crank.createElement)("img", {
+          src: comment.author.image,
+          class: "comment-author-img"
+        })), "\xA0", (0, _crank.createElement)("a", {
+          href: (0, _utils.linkHref)("/profile/" + comment.author.username),
+          class: "comment-author"
+        }, comment.author.username), (0, _crank.createElement)("span", {
+          class: "date-posted"
+        }, new Date(comment.createdAt).toDateString()), (0, _userService.isLoggedIn)() && comment.author.username === user.username && (0, _crank.createElement)("span", {
+          class: "mod-options"
+        }, (0, _crank.createElement)("button", {
+          type: "button",
+          class: "btn",
+          style: "background-color:transparent;",
+          onclick: handleDelete
+        }, (0, _crank.createElement)("i", {
+          class: "ion-trash-a"
+        })))))];
+
+      case 3:
+        _f.sent();
+
+        _f.label = 4;
+
+      case 4:
+        _c = _b.next();
+        return [3
+        /*break*/
+        , 2];
+
+      case 5:
+        return [3
+        /*break*/
+        , 8];
+
+      case 6:
+        e_1_1 = _f.sent();
+        e_1 = {
+          error: e_1_1
+        };
+        return [3
+        /*break*/
+        , 8];
+
+      case 7:
+        try {
+          if (_c && !_c.done && (_d = _b.return)) _d.call(_b);
+        } finally {
+          if (e_1) throw e_1.error;
+        }
+
+        return [7
+        /*endfinally*/
+        ];
+
+      case 8:
+        return [2
+        /*return*/
+        ];
+    }
+  });
+}
+},{"@bikeshaving/crank":"k82I","../../services/userService":"V8SH","../../state/userState":"qsQo","../../utils":"s2T4"}],"mmSo":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19163,250 +19426,7 @@ function CommentForm(_a) {
     }
   });
 }
-},{"@bikeshaving/crank":"k82I","../../state/userState":"qsQo","../../services/commentService":"NpXW"}],"Fgin":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Comment = Comment;
-
-var _crank = require("@bikeshaving/crank");
-
-var _userState = require("../../state/userState");
-
-var _utils = require("../../utils");
-
-var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var __values = void 0 && (void 0).__values || function (o) {
-  var s = typeof Symbol === "function" && Symbol.iterator,
-      m = s && o[s],
-      i = 0;
-  if (m) return m.call(o);
-  if (o && typeof o.length === "number") return {
-    next: function next() {
-      if (o && i >= o.length) o = void 0;
-      return {
-        value: o && o[i++],
-        done: !o
-      };
-    }
-  };
-  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-/** @jsx createElement */
-
-
-function Comment(_a) {
-  var user, _b, _c, e_1_1;
-
-  var e_1, _d, _e;
-
-  var comment = _a.comment,
-      handleDelete = _a.handleDelete;
-  return __generator(this, function (_f) {
-    switch (_f.label) {
-      case 0:
-        user = (0, _userState.getUser)();
-        _f.label = 1;
-
-      case 1:
-        _f.trys.push([1, 6, 7, 8]);
-
-        _b = __values(this), _c = _b.next();
-        _f.label = 2;
-
-      case 2:
-        if (!!_c.done) return [3
-        /*break*/
-        , 5];
-        _e = _c.value, comment = _e.comment, handleDelete = _e.handleDelete;
-        return [4
-        /*yield*/
-        , (0, _crank.createElement)("div", {
-          class: "card"
-        }, (0, _crank.createElement)("div", {
-          class: "card-block"
-        }, (0, _crank.createElement)("p", {
-          class: "card-text"
-        }, comment.body)), (0, _crank.createElement)("div", {
-          class: "card-footer"
-        }, (0, _crank.createElement)("a", {
-          href: (0, _utils.linkHref)("/profile/" + comment.author.username),
-          class: "comment-author"
-        }, (0, _crank.createElement)("img", {
-          src: comment.author.image,
-          class: "comment-author-img"
-        })), "\xA0", (0, _crank.createElement)("a", {
-          href: (0, _utils.linkHref)("/profile/" + comment.author.username),
-          class: "comment-author"
-        }, comment.author.username), (0, _crank.createElement)("span", {
-          class: "date-posted"
-        }, new Date(comment.createdAt).toDateString()), (0, _userState.isLoggedIn)() && comment.author.username === user.username && (0, _crank.createElement)("span", {
-          class: "mod-options"
-        }, (0, _crank.createElement)("button", {
-          type: "button",
-          class: "btn",
-          style: "background-color:transparent;",
-          onclick: handleDelete
-        }, (0, _crank.createElement)("i", {
-          class: "ion-trash-a"
-        })))))];
-
-      case 3:
-        _f.sent();
-
-        _f.label = 4;
-
-      case 4:
-        _c = _b.next();
-        return [3
-        /*break*/
-        , 2];
-
-      case 5:
-        return [3
-        /*break*/
-        , 8];
-
-      case 6:
-        e_1_1 = _f.sent();
-        e_1 = {
-          error: e_1_1
-        };
-        return [3
-        /*break*/
-        , 8];
-
-      case 7:
-        try {
-          if (_c && !_c.done && (_d = _b.return)) _d.call(_b);
-        } finally {
-          if (e_1) throw e_1.error;
-        }
-
-        return [7
-        /*endfinally*/
-        ];
-
-      case 8:
-        return [2
-        /*return*/
-        ];
-    }
-  });
-}
-},{"@bikeshaving/crank":"k82I","../../state/userState":"qsQo","../../utils":"s2T4"}],"curH":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../state/userState":"qsQo","../../services/commentService":"NpXW"}],"curH":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19420,13 +19440,13 @@ var _components = require("../../components");
 
 var _commentService = require("../../services/commentService");
 
-var _userState = require("../../state/userState");
+var _userService = require("../../services/userService");
 
-var _CommentForm = require("./CommentForm");
+var _utils = require("../../utils");
 
 var _Comment = require("./Comment");
 
-var _utils = require("../../utils");
+var _CommentForm = require("./CommentForm");
 
 var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
   var _ = {
@@ -19700,10 +19720,10 @@ function CommentSection(_a) {
           article = _b.value.article;
           return [4
           /*yield*/
-          , __await((0, _crank.createElement)(_crank.Fragment, null, (0, _userState.isLoggedIn)() && (0, _crank.createElement)(_CommentForm.CommentForm, {
+          , __await((0, _crank.createElement)(_crank.Fragment, null, (0, _userService.isLoggedIn)() && (0, _crank.createElement)(_CommentForm.CommentForm, {
             article: article,
             handleNewComment: addComment
-          }), !(0, _userState.isLoggedIn)() && (0, _crank.createElement)("p", null, (0, _crank.createElement)("a", {
+          }), !(0, _userService.isLoggedIn)() && (0, _crank.createElement)("p", null, (0, _crank.createElement)("a", {
             href: (0, _utils.linkHref)('/login')
           }, "Sign in"), " or ", (0, _crank.createElement)("a", {
             href: (0, _utils.linkHref)('/register')
@@ -19785,7 +19805,7 @@ function CommentSection(_a) {
     });
   });
 }
-},{"@bikeshaving/crank":"k82I","../../components":"iVTS","../../services/commentService":"NpXW","../../state/userState":"qsQo","./CommentForm":"mmSo","./Comment":"Fgin","../../utils":"s2T4"}],"EToo":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../components":"iVTS","../../services/commentService":"NpXW","../../services/userService":"V8SH","../../utils":"s2T4","./Comment":"Fgin","./CommentForm":"mmSo"}],"EToo":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19805,7 +19825,7 @@ var _favoriteService = require("../../services/favoriteService");
 
 var _followService = require("../../services/followService");
 
-var _userState = require("../../state/userState");
+var _userService = require("../../services/userService");
 
 var _ArticleActions = require("./ArticleActions");
 
@@ -20133,7 +20153,7 @@ function Article(_a) {
             class: "container page"
           }, (0, _crank.createElement)(_ArticleContent.ArticleContent, {
             article: article
-          }), (0, _crank.createElement)("hr", null), (0, _userState.isLoggedIn)() && (0, _crank.createElement)(_ArticleActions.ArticleActions, {
+          }), (0, _crank.createElement)("hr", null), (0, _userService.isLoggedIn)() && (0, _crank.createElement)(_ArticleActions.ArticleActions, {
             article: article
           }), (0, _crank.createElement)("div", {
             class: "row"
@@ -20211,7 +20231,7 @@ function Article(_a) {
     });
   });
 }
-},{"@bikeshaving/crank":"k82I","../../components":"iVTS","../../services/articleService":"GatF","../../services/eventService":"fkvO","../../services/favoriteService":"KAtv","../../services/followService":"tt01","../../state/userState":"qsQo","./ArticleActions":"YkrN","./ArticleBanner":"Fba3","./ArticleContent":"g3nS","./CommentSection":"curH"}],"w8yd":[function(require,module,exports) {
+},{"@bikeshaving/crank":"k82I","../../components":"iVTS","../../services/articleService":"GatF","../../services/eventService":"fkvO","../../services/favoriteService":"KAtv","../../services/followService":"tt01","../../services/userService":"V8SH","./ArticleActions":"YkrN","./ArticleBanner":"Fba3","./ArticleContent":"g3nS","./CommentSection":"curH"}],"w8yd":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
